@@ -11,6 +11,8 @@ public class Musiclist {
 
     private Integer clickvolume;
 
+    private String type;
+
     public Integer getId() {
         return id;
     }
@@ -49,5 +51,13 @@ public class Musiclist {
 
     public void setClickvolume(Integer clickvolume) {
         this.clickvolume = clickvolume;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 }
