@@ -67,11 +67,14 @@
     </div>
 </div>
 </div>
-<script src="js/jquery.min.js?v=2.1.4"></script>
-<script src="js/bootstrap-paginator.min.js"></script>
-<script src="js/jquery.validate.min.js"></script>
-<script src="js/tools.js"></script>
-<script src="js/jquery.cookie.js"></script>
+<!--<script src="/js/jquery.min.js?v=2.1.4"></script>
+<script src="/js/bootstrap-paginator.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/tools.js"></script>
+<script src="/js/jquery.cookie.js"></script>-->
+<script src="/webjars/jquery/2.2.4/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="/js/jquery.cookie.js"></script>
 
 
 <script type="text/javascript">
@@ -83,27 +86,27 @@
           }
       }); */
     getList2("songName=" + $.cookie("song_search"));//调用getlist2方法
+    console.log($.cookie("song_search"));
 
     function getList2(lll) {
+        console.log(1)
         $.ajax({
-            url: "musicLink/getSongRearch",//后台地址
+            url: "/musicLink/getSongRearch",//后台地址
             type: "POST",//post方式请求
             data: lll,//将数据通过lll在调用的时候传入
             success: function (data) {
-                if (data.statusCode == "200") {
+                if (data != null) {
                     var search = document.getElementById("songName").value;//获取搜索框内的文本
                     $.cookie("song_search", search, {expires: 7, path: "/"});//将文本存入cookie
                     var str = '';
                     /* data.data.list.length对应respon.map.list.length */
-                    for (var i = 0; i < data.data.list.length; i++) {
+                    for (var i = 0; i < data.music.length; i++) {
                         var a = i + 1;
-
-
                         str += '<tr>'
                             + '<td class="number111"  style="padding: 14px;border-bottom: 1px solid #eee; width: 100px;text-align: center;">' + a + '</td>'
-                            + '<td  style="padding: 14px;border-bottom: 1px solid #eee;width: 600px;text-align: center;"><a class=sName' + i + ' href="#">' + data.data.list[i].ml_songName + '</a>' +
+                            + '<td  style="padding: 14px;border-bottom: 1px solid #eee;width: 600px;text-align: center;"><a class=sName' + i + ' href="#">' + data.music[i].name + '</a>' +
                             '<span class="glyphicon glyphicon-heart" id=sFav' + i + ' style="color: #eee;float: right;"></span></td>'
-                            + '<td style="padding: 14px;border-bottom: 1px solid #eee;width: 300px;text-align: center;"><a href="#">' + data.data.list[i].ml_singer + '</a></td>'
+                            + '<td style="padding: 14px;border-bottom: 1px solid #eee;width: 300px;text-align: center;"><a href="#">' + data.music[i].singerId + '</a></td>'
                             + '</tr>';
 
                         function play(i) {
@@ -124,21 +127,22 @@
                         }
 
                         play1(i);
+                        console.log(str)
                     }
 
                     function fn(j) {
-                        console.log(data.data.list[j].ml_id);
-                        $.cookie("song_link", data.data.list[j].ml_songLink, {expires: 7, path: "/"});
-                        $.cookie("song_name", data.data.list[j].ml_songName, {expires: 7, path: "/"});
-                        $.cookie("song_singer", data.data.list[j].ml_singer, {expires: 7, path: "/"});
-                        $.cookie("song_photo", data.data.list[j].ml_photoLink, {expires: 7, path: "/"});
+                        console.log(data.music[j + 1].id);
+                        $.cookie("song_link", data.music[j].slbumUd, {expires: 7, path: "/"});
+                        $.cookie("song_name", data.music[j].name, {expires: 7, path: "/"});
+                        $.cookie("song_singer", data.music[j].singerId, {expires: 7, path: "/"});
+                        $.cookie("song_photo", data.music[j].musicpic, {expires: 7, path: "/"});
                         window.location.href = "/QQmusic.html";
                     }
 
                     function fn1(j) {
-                        console.log(data.data.list[j].ml_id);
-                        $.cookie("song_id", data.data.list[j].ml_id, {expires: 7, path: "/"});
-                        $.cookie("song_name", data.data.list[j].ml_songName, {expires: 7, path: "/"});
+                        alert(j);
+                        $.cookie("song_id", data.music[j + 1].id, {expires: 7, path: "/"});
+                        $.cookie("song_name", data.music[j + 1].name, {expires: 7, path: "/"});
                     }
 
 

@@ -553,6 +553,76 @@ public class MusicExample {
             addCriterion("lyric not between", value1, value2, "lyric");
             return (Criteria) this;
         }
+
+        public Criteria andMusicpicIsNull() {
+            addCriterion("musicpic is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicpicIsNotNull() {
+            addCriterion("musicpic is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicpicEqualTo(String value) {
+            addCriterion("musicpic =", value, "musicpic");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicpicNotEqualTo(String value) {
+            addCriterion("musicpic <>", value, "musicpic");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicpicGreaterThan(String value) {
+            addCriterion("musicpic >", value, "musicpic");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicpicGreaterThanOrEqualTo(String value) {
+            addCriterion("musicpic >=", value, "musicpic");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicpicLessThan(String value) {
+            addCriterion("musicpic <", value, "musicpic");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicpicLessThanOrEqualTo(String value) {
+            addCriterion("musicpic <=", value, "musicpic");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicpicLike(String value) {
+            addCriterion("musicpic like", value, "musicpic");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicpicNotLike(String value) {
+            addCriterion("musicpic not like", value, "musicpic");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicpicIn(List<String> values) {
+            addCriterion("musicpic in", values, "musicpic");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicpicNotIn(List<String> values) {
+            addCriterion("musicpic not in", values, "musicpic");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicpicBetween(String value1, String value2) {
+            addCriterion("musicpic between", value1, value2, "musicpic");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusicpicNotBetween(String value1, String value2) {
+            addCriterion("musicpic not between", value1, value2, "musicpic");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

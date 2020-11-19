@@ -15,6 +15,8 @@ public class Music {
 
     private String lyric;
 
+    private String musicpic;
+
     public Integer getId() {
         return id;
     }
@@ -69,5 +71,13 @@ public class Music {
 
     public void setLyric(String lyric) {
         this.lyric = lyric == null ? null : lyric.trim();
+    }
+
+    public String getMusicpic() {
+        return musicpic;
+    }
+
+    public void setMusicpic(String musicpic) {
+        this.musicpic = musicpic == null ? null : musicpic.trim();
     }
 }

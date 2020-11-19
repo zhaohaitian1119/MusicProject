@@ -9,6 +9,7 @@
     <result column="slbum_ud" property="slbumUd" jdbcType="INTEGER" />
     <result column="clickvolume" property="clickvolume" jdbcType="INTEGER" />
     <result column="lyric" property="lyric" jdbcType="VARCHAR" />
+    <result column="musicpic" property="musicpic" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, address, singer_id, slbum_ud, clickvolume, lyric
+    id, name, address, singer_id, slbum_ud, clickvolume, lyric, musicpic
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.group.music.qymusic.pojo.MusicExample" >
     select
@@ -104,10 +105,10 @@
   <insert id="insert" parameterType="com.group.music.qymusic.pojo.Music" >
     insert into music (id, name, address, 
       singer_id, slbum_ud, clickvolume, 
-      lyric)
+      lyric, musicpic)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{singerId,jdbcType=INTEGER}, #{slbumUd,jdbcType=INTEGER}, #{clickvolume,jdbcType=INTEGER}, 
-      #{lyric,jdbcType=VARCHAR})
+      #{lyric,jdbcType=VARCHAR}, #{musicpic,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.group.music.qymusic.pojo.Music" >
     insert into music
@@ -133,6 +134,9 @@
       <if test="lyric != null" >
         lyric,
       </if>
+      <if test="musicpic != null" >
+        musicpic,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -155,6 +159,9 @@
       </if>
       <if test="lyric != null" >
         #{lyric,jdbcType=VARCHAR},
+      </if>
+      <if test="musicpic != null" >
+        #{musicpic,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -188,6 +195,9 @@
       <if test="record.lyric != null" >
         lyric = #{record.lyric,jdbcType=VARCHAR},
       </if>
+      <if test="record.musicpic != null" >
+        musicpic = #{record.musicpic,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +211,8 @@
       singer_id = #{record.singerId,jdbcType=INTEGER},
       slbum_ud = #{record.slbumUd,jdbcType=INTEGER},
       clickvolume = #{record.clickvolume,jdbcType=INTEGER},
-      lyric = #{record.lyric,jdbcType=VARCHAR}
+      lyric = #{record.lyric,jdbcType=VARCHAR},
+      musicpic = #{record.musicpic,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +238,9 @@
       <if test="lyric != null" >
         lyric = #{lyric,jdbcType=VARCHAR},
       </if>
+      <if test="musicpic != null" >
+        musicpic = #{musicpic,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -237,7 +251,8 @@
       singer_id = #{singerId,jdbcType=INTEGER},
       slbum_ud = #{slbumUd,jdbcType=INTEGER},
       clickvolume = #{clickvolume,jdbcType=INTEGER},
-      lyric = #{lyric,jdbcType=VARCHAR}
+      lyric = #{lyric,jdbcType=VARCHAR},
+      musicpic = #{musicpic,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
