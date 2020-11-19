@@ -13,6 +13,18 @@ public class Musiclist {
 
     private String type;
 
+    public Musiclist() {
+    }
+
+    public Musiclist(Integer id, String name, String img, String introduce, Integer clickvolume, String type) {
+        this.id = id;
+        this.name = name;
+        this.img = img;
+        this.introduce = introduce;
+        this.clickvolume = clickvolume;
+        this.type = type;
+    }
+
     public Integer getId() {
         return id;
     }

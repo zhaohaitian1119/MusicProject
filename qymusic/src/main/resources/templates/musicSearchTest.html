@@ -141,8 +141,8 @@
 
                     function fn1(j) {
                         alert(j);
-                        $.cookie("song_id", data.music[j + 1].id, {expires: 7, path: "/"});
-                        $.cookie("song_name", data.music[j + 1].name, {expires: 7, path: "/"});
+                        $.cookie("song_id", data.music[j].id, {expires: 7, path: "/"});
+                        $.cookie("song_name", data.music[j].name, {expires: 7, path: "/"});
                     }
 
 
@@ -159,29 +159,49 @@
 
 
     function fav(j) {
-        $.ajax({
-            async: false,
-            url: "/musicLink/addMusicCollect",
-            type: "post",
-            data: {
-                "songName": $.cookie("song_name"),
-                "song_id": $.cookie("song_id"),
-                "user_name": $.cookie("user_name"),
-                "user_password": $.cookie("user_password"),
-            },
-            success: function (data) {//webspond
-                if (data.statusCode == "200") {
-                    $('#sFav' + j).css('color', '#ff69b4');
-                    alert("歌曲收藏成功，请去我的音乐查看！")
+        /*  $.ajax({
+              async: false,
+              url: "/musicLink/addMusicCollect",
+              type: "post",
+              data: {
+                  "songName": $.cookie("song_name"),
+                  "song_id": $.cookie("song_id"),
+                  "user_name": $.cookie("user_name"),
+                  "user_password": $.cookie("user_password"),
+              },
+              success: function (data) {//webspond
+                  if (data.statusCode == "200") {
+                      $('#sFav' + j).css('color', '#ff69b4');
+                      alert("歌曲收藏成功，请去我的音乐查看！")
 
-                    //location.reload();
-                } else {
-                    alert("亲！您已经收藏这首歌了哦，快去我的音乐中查看吧");
-                }
-
-            },
-
+                      //location.reload();
+                  } else if (data.statusCode == "201") {
+                      alert("亲！您已经收藏这首歌了哦，快去我的音乐中查看吧");
+                  } else if (data.statusCode == "1") {
+                      alert("请先登录您的账号");
+                  }
+              },
+          })*/
+        alert("111");
+        var json = ({
+            "songName": $.cookie("song_name"),
+            "song_id": $.cookie("song_id"),
+            "user_name": $.cookie("user_name"),
+            "user_password": $.cookie("user_password")
         })
+        alert(json);
+        $.post("/musicLink/addMusicCollect", json, function (data) {
+            if (data.statusCode == "200") {
+                $('#sFav' + j).css('color', '#ff69b4');
+                alert("歌曲收藏成功，请去我的音乐查看！")
+
+                //location.reload();
+            } else if (data.statusCode == "201") {
+                alert("亲！您已经收藏这首歌了哦，快去我的音乐中查看吧");
+            } else if (data.statusCode == "1") {
+                alert("请先登录您的账号");
+            }
+        }, "json")
     }//已在mymusic中注释
 
 
