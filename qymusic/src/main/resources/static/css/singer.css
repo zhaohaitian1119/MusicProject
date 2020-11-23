@@ -86,7 +86,7 @@ body{
 .search1 .navmargin .dengluzhuce .denglu{
 	margin:20px 5px;
 	padding: 5px 10px;
-	background-repeat: 
+	/*background-repeat: */
 }
 
 .search1 .navmargin .dengluzhuce a{
@@ -300,7 +300,7 @@ a {
     float: left;
     position: relative;
     z-index: 1;
-	margin: 1;
+	/*margin: 1;*/
     padding: 0;
 }
 
@@ -371,22 +371,60 @@ a {
 
 .l {
 	width: 210px;
-	height: 481px;
-	margin-top: 20px;
+	height: 600px;
+	margin-top: 0px;
 	float: left;
+	position: absolute;
+	left: 250px;
+	top: 60px;
 }
 
+.a1{
+	font-weight: bolder;
+	text-align: left;
+}
 .sng1 {
 	width: 210px;
-	height: 120px;
-	margin-bottom: 42px;
-	color: #2a2a2a;	
+	height: 90px;
+	margin-bottom: 40px;
+	color: #2a2a2a;
+	margin-top: 10px;
 }
-
+.sng5 {
+	width: 210px;
+	height: 40px;
+	margin-bottom: 30px;
+	color: #2a2a2a;
+	padding-top: 0px;
+}
+.sng2 {
+	width: 210px;
+	height: 90px;
+	margin-bottom: 40px;
+	color: #2a2a2a;
+	margin-top: 10px;
+}
+.sng4 {
+	width: 210px;
+	height: 90px;
+	margin-bottom: 20px;
+	color: #2a2a2a;
+	margin-top: 10px;
+}
+.sng3 {
+	width: 210px;
+	height: 90px;
+	margin-bottom: 40px;
+	color: #2a2a2a;
+	margin-top: 10px;
+}
+.span1{
+	font-size: 20px;
+}
 .all {
 	display: block;
 	width: 210px;
-	height: 30px;	
+	height: 30px;
 	font-size: 15px;
 	text-align: center;
 	line-height: 30px;
@@ -397,31 +435,31 @@ a {
 	color: #fff;
 }
 
+.big .l .sng5 .all :hover {
+	background: #85d2f2;
+	color: #fff;
+}
+
+.big .l .sng4 .all :hover {
+	background: #85d2f2;
+	color: #fff;
+}
+
+
+
 
 .hover {
 	display: block;
 }
 
-.sng2 {
-	width: 210px;
-	height: 90px;
-	margin-bottom: 42px;
-	color: #2a2a2a;
-	margin-top: 60px;
-}
+
 
 .big .l .sng2 .all :hover {
 	background: #85d2f2;
 	color: #fff;
 }
 
-.sng3 {
-	width: 210px;
-	height: 145px;
-	margin-bottom: 42px;
-	color: #2a2a2a;
-	margin-top: 60px;
-}
+
 
 .big .l .sng3 .all :hover {
 	background: #85d2f2;
@@ -444,13 +482,14 @@ a {
 }
 
 .r {
+
 	display: block;
 	width: 781px;
 	height: 590px;
 	float: right;
 	padding-top: 0;
 	padding-left: 10px;
-	margin-left: 9px;
+	margin-left: -10px;
 	border-left: 1px solid #e5e5e5;
 }
 
@@ -477,7 +516,7 @@ a {
 }
 .zhong {
 	width: 770px;
-	height: 240px;
+	height: 270px;
 	padding: 10px;
 }
 .singerpn {
