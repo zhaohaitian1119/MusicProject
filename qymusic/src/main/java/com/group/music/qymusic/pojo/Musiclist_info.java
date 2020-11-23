@@ -30,4 +30,13 @@ public class Musiclist_info {
     public void setMusicId(Integer musicId) {
         this.musicId = musicId;
     }
+
+    public Musiclist_info() {
+    }
+
+    public Musiclist_info(Integer id, Integer musiclistId, Integer musicId) {
+        this.id = id;
+        this.musiclistId = musiclistId;
+        this.musicId = musicId;
+    }
 }

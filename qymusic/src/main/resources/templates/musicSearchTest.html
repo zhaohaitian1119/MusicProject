@@ -23,10 +23,11 @@
                         <div class="input-group">
                             <input type="text" id="songName" name="songName" class="form-control" placeholder="为音乐而生">
                             <span class="input-group-btn">
-								 <button onclick="getList2($('#songName').serialize())" class="btn btn-default"
-                                         type="button">                                          <!--点击按钮触发getlist2事件-->
-									搜索
-								</button>
+								  <button id="select" onclick="sel()"
+                                          class="btn btn-default"
+                                          type="button">
+                                        搜索
+                                </button>
 							</span>
                         </div><!-- /input-group -->
                     </div><!-- /.col-lg-6 -->
@@ -85,21 +86,148 @@
               rearchSong($('#test').attr("action"));
           }
       }); */
-    getList2("songName=" + $.cookie("song_search"));//调用getlist2方法
+
+
+    select($.cookie("song_search"));//调用getlist2方法
+
+
     console.log($.cookie("song_search"));
 
-    function getList2(lll) {
+    function sel() {
+        var songname = $("#songName").val();
+        $.post("/musicLink/getSongRearch", {"songname": songname}, function (data) {
+            if (data != null) {
+                var search = document.getElementById("songName").value;//获取搜索框内的文本
+                $.cookie("song_search", search, {expires: 7, path: "/"});//将文本存入cookie
+                var str = '';
+                /* data.data.list.length对应respon.map.list.length */
+                for (var i = 0; i < data.music.length; i++) {
+                    var a = i + 1;
+                    str += '<tr>'
+                        + '<td class="number111"  style="padding: 14px;border-bottom: 1px solid #eee; width: 100px;text-align: center;">' + a + '</td>'
+                        + '<td  style="padding: 14px;border-bottom: 1px solid #eee;width: 600px;text-align: center;"><a class=sName' + i + ' href="#">' + data.music[i].name + '</a>' +
+                        '<span class="glyphicon glyphicon-heart" id=sFav' + i + ' style="color: #eee;float: right;"></span></td>'
+                        + '<td style="padding: 14px;border-bottom: 1px solid #eee;width: 300px;text-align: center;"><a href="#">' + data.music[i].singername + '</a></td>'
+                        + '</tr>';
+
+                    function play(i) {
+
+                        $("table").on('click', '.sName' + i, function () {
+                            fn(i);
+                        });
+                    }
+
+                    play(i);
+
+                    function play1(i) {
+                        $("#sFav").unbind();
+                        $("table").on('click', '#sFav' + i, function () {
+                            fn1(i);
+                            fav(i);
+                        });
+                    }
+
+                    play1(i);
+                    console.log(str)
+                }
+
+                function fn(j) {
+                    console.log(data.music[j + 1].id);
+                    $.cookie("song_link", data.music[j].slbumUd, {expires: 7, path: "/"});
+                    $.cookie("song_name", data.music[j].name, {expires: 7, path: "/"});
+                    $.cookie("song_singer", data.music[j].singerId, {expires: 7, path: "/"});
+                    $.cookie("song_photo", data.music[j].musicpic, {expires: 7, path: "/"});
+                    window.location.href = "/QQmusic.html";
+                }
+
+                function fn1(j) {
+                    alert(j);
+                    $.cookie("song_id", data.music[j].id, {expires: 7, path: "/"});
+                    $.cookie("song_name", data.music[j].name, {expires: 7, path: "/"});
+                }
+
+
+                $("table tbody").html(str);
+            } else if (data.statusCode == "202") {
+                alert("搜索不到歌曲！");
+            }
+        }, "json")
+    }
+
+    function select(songname) {
+        $.post("/musicLink/getSongRearch", {"songname": songname}, function (data) {
+            if (data != null) {
+                var search = document.getElementById("songName").value;//获取搜索框内的文本
+                $.cookie("song_search", search, {expires: 7, path: "/"});//将文本存入cookie
+                var str = '';
+                /* data.data.list.length对应respon.map.list.length */
+                for (var i = 0; i < data.music.length; i++) {
+                    var a = i + 1;
+                    str += '<tr>'
+                        + '<td class="number111"  style="padding: 14px;border-bottom: 1px solid #eee; width: 100px;text-align: center;">' + a + '</td>'
+                        + '<td  style="padding: 14px;border-bottom: 1px solid #eee;width: 600px;text-align: center;"><a class=sName' + i + ' href="#">' + data.music[i].name + '</a>' +
+                        '<span class="glyphicon glyphicon-heart" id=sFav' + i + ' style="color: #eee;float: right;"></span></td>'
+                        + '<td style="padding: 14px;border-bottom: 1px solid #eee;width: 300px;text-align: center;"><a href="#">' + data.music[i].singername + '</a></td>'
+                        + '</tr>';
+
+                    function play(i) {
+
+                        $("table").on('click', '.sName' + i, function () {
+                            fn(i);
+                        });
+                    }
+
+                    play(i);
+
+                    function play1(i) {
+                        $("#sFav").unbind();
+                        $("table").on('click', '#sFav' + i, function () {
+                            fn1(i);
+                            fav(i);
+                        });
+                    }
+
+                    play1(i);
+                    console.log(str)
+                }
+
+                function fn(j) {
+                    console.log(data.music[j + 1].id);
+                    $.cookie("song_link", data.music[j].slbumUd, {expires: 7, path: "/"});
+                    $.cookie("song_name", data.music[j].name, {expires: 7, path: "/"});
+                    $.cookie("song_singer", data.music[j].singerId, {expires: 7, path: "/"});
+                    $.cookie("song_photo", data.music[j].musicpic, {expires: 7, path: "/"});
+                    window.location.href = "/QQmusic.html";
+                }
+
+                function fn1(j) {
+                    alert(j);
+                    $.cookie("song_id", data.music[j].id, {expires: 7, path: "/"});
+                    $.cookie("song_name", data.music[j].name, {expires: 7, path: "/"});
+                }
+
+
+                $("table tbody").html(str);
+            } else if (data.statusCode == "202") {
+                alert("搜索不到歌曲！");
+            }
+        }, "json")
+
+    }
+
+
+    /*function getList2(songname) {
         console.log(1)
         $.ajax({
             url: "/musicLink/getSongRearch",//后台地址
             type: "POST",//post方式请求
-            data: lll,//将数据通过lll在调用的时候传入
+            data: songname,//将数据通过lll在调用的时候传入
             success: function (data) {
                 if (data != null) {
                     var search = document.getElementById("songName").value;//获取搜索框内的文本
                     $.cookie("song_search", search, {expires: 7, path: "/"});//将文本存入cookie
                     var str = '';
-                    /* data.data.list.length对应respon.map.list.length */
+                    /!* data.data.list.length对应respon.map.list.length *!/
                     for (var i = 0; i < data.music.length; i++) {
                         var a = i + 1;
                         str += '<tr>'
@@ -155,7 +283,7 @@
                 alert(JSON.stringify(data));
             }
         })
-    }//已在mymusic中注释
+    }*///已在mymusic中注释
 
 
     function fav(j) {

@@ -1,6 +1,7 @@
 package com.group.music.qymusic.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Singer {
     private Integer id;
@@ -12,6 +13,15 @@ public class Singer {
     private Date birthday;
 
     private String introduce;
+    /*private List<Music> musiclist;
+
+    public List<Music> getMusiclist() {
+        return musiclist;
+    }
+
+    public void setMusiclist(List<Music> musiclist) {
+        this.musiclist = musiclist;
+    }*/
 
     public Integer getId() {
         return id;

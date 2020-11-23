@@ -1,5 +1,6 @@
 package com.group.music.qymusic.mapper;
 
+import com.group.music.qymusic.pojo.Music;
 import com.group.music.qymusic.pojo.Singer;
 import com.group.music.qymusic.pojo.SingerExample;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,5 @@ public interface SingerMapper {
     int updateByPrimaryKeySelective(Singer record);
 
     int updateByPrimaryKey(Singer record);
+    
 }

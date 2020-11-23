@@ -17,6 +17,18 @@ public class Music {
 
     private String musicpic;
 
+
+    private String singername;
+
+    public String getSingername() {
+        return singername;
+    }
+
+    public void setSingername(String singername) {
+        this.singername = singername;
+    }
+//    private Singer singer;
+
     public Integer getId() {
         return id;
     }
