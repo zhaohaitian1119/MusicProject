@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface MusicServicejjs {
     List<Music> selectByName(String lll);
+
+    Music selectById(Integer id);
 }

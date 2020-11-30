@@ -1,5 +1,7 @@
 package com.group.music.qymusic.pojo;
 
+import java.util.List;
+
 public class Musiclist {
     private Integer id;
 
@@ -12,6 +14,8 @@ public class Musiclist {
     private Integer clickvolume;
 
     private String type;
+
+
 
     public Musiclist() {
     }

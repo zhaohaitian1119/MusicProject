@@ -4,16 +4,20 @@
     <meta charset="utf-8">
     <title>轻语搜索</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
     <link rel="shortcut icon" type="image/x-icon" href="images/logo1.png">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="/css/index1.css">
+
 </head>
 <body style="user-select: none">
-<div class="search1">
+<div class="search1" style="border: 0px solid black">
     <div class="logo1" style="width: 153px; padding: 20.6px 0; display: inline-block;"><a
             href="/index.html" target="_blank"><img src="images/logo2.png" alt=""></a>
     </div>
+
 
     <nav class="navmargin navbar navbar-default" role="navigation">
         <div class="shurukuang" style="padding: 20.6px 30px;">
@@ -25,7 +29,7 @@
                             <span class="input-group-btn">
 								  <button id="select" onclick="sel()"
                                           class="btn btn-default"
-                                          type="button">
+                                          type="button"/>
                                         搜索
                                 </button>
 							</span>
@@ -37,17 +41,25 @@
         <a style="font-size:14px;float: right;margin: 20px"
            href="/mymusic.html" target="_blank">点击跳转我的音乐...</a>
     </nav>
+
 </div>
 
 <div class="row">
+
     <div class="col-sm-12">
         <div class="ibox float-e-margins">
-
+            <div class="content_toolbar" style="border: 0px solid red;margin-left: 165px">
+                <span class="glyphicon glyphicon-heart-empty"> 收 藏</span>
+                <span class="glyphicon glyphicon-plus-sign"> 添加到</span>
+                <span class="glyphicon glyphicon-download-alt"> 下 载</span>
+                <span class="glyphicon glyphicon-trash"> 删 除</span>
+                <span class="glyphicon glyphicon-fire"> 清空列表</span>
+            </div>
             <div class="ibox-content">
                 <div class="table-responsive">
                     <table style="width: 1200px;margin: auto; overflow: auto;">
                         <thead>
-                        <tr style="border-bottom: 1px solid #919191;line-height: 35px;">
+                        <tr style="border-bottom: 1px solid #919191;line-height: 35px;" th:text="${session.name}">
                             <th style="text-align: center;font-size: 20px">序号</th>
                             <th style="text-align: center;font-size: 20px">歌名</th>
                             <th style="text-align: center;font-size: 20px">歌手</th>
@@ -68,11 +80,11 @@
     </div>
 </div>
 </div>
-<!--<script src="/js/jquery.min.js?v=2.1.4"></script>
+<script src="/js/jquery.min.js?v=2.1.4"></script>
 <script src="/js/bootstrap-paginator.min.js"></script>
 <script src="/js/jquery.validate.min.js"></script>
 <script src="/js/tools.js"></script>
-<script src="/js/jquery.cookie.js"></script>-->
+<script src="/js/jquery.cookie.js"></script>
 <script src="/webjars/jquery/2.2.4/jquery.min.js"></script>
 <script src="/webjars/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="/js/jquery.cookie.js"></script>
@@ -133,10 +145,12 @@
 
                 function fn(j) {
                     console.log(data.music[j + 1].id);
-                    $.cookie("song_link", data.music[j].slbumUd, {expires: 7, path: "/"});
+                    $.cookie("song_link", data.music[j].address, {expires: 7, path: "/"});//专辑编号
+                    $.cookie("song_name", data.music[j].name, {expires: 7, path: "/"});//歌曲名称
+                    $.cookie("song_singer", data.music[j].singername, {expires: 7, path: "/"});//歌手
+                    $.cookie("song_photo", data.music[j].musicpic, {expires: 7, path: "/"});//歌曲封面
+                    $.cookie("song_id", data.music[j].id, {expires: 7, path: "/"});
                     $.cookie("song_name", data.music[j].name, {expires: 7, path: "/"});
-                    $.cookie("song_singer", data.music[j].singerId, {expires: 7, path: "/"});
-                    $.cookie("song_photo", data.music[j].musicpic, {expires: 7, path: "/"});
                     window.location.href = "/QQmusic.html";
                 }
 
@@ -193,11 +207,15 @@
 
                 function fn(j) {
                     console.log(data.music[j + 1].id);
-                    $.cookie("song_link", data.music[j].slbumUd, {expires: 7, path: "/"});
+                    alert("" + data.music[j].address);
+                    $.cookie("song_link", data.music[j].address, {expires: 7, path: "/"});
                     $.cookie("song_name", data.music[j].name, {expires: 7, path: "/"});
-                    $.cookie("song_singer", data.music[j].singerId, {expires: 7, path: "/"});
+                    $.cookie("song_singer", data.music[j].singername, {expires: 7, path: "/"});
                     $.cookie("song_photo", data.music[j].musicpic, {expires: 7, path: "/"});
-                    window.location.href = "/QQmusic.html";
+                    $.cookie("song_id", data.music[j].id, {expires: 7, path: "/"});
+                    $.cookie("song_name", data.music[j].name, {expires: 7, path: "/"});
+                    /* window.location.href = "/QQmusic.html";*/
+                    location.href = "/myMusic/getMyMusicList?song_id=" + data.music[j].id;
                 }
 
                 function fn1(j) {
@@ -216,108 +234,13 @@
     }
 
 
-    /*function getList2(songname) {
-        console.log(1)
-        $.ajax({
-            url: "/musicLink/getSongRearch",//后台地址
-            type: "POST",//post方式请求
-            data: songname,//将数据通过lll在调用的时候传入
-            success: function (data) {
-                if (data != null) {
-                    var search = document.getElementById("songName").value;//获取搜索框内的文本
-                    $.cookie("song_search", search, {expires: 7, path: "/"});//将文本存入cookie
-                    var str = '';
-                    /!* data.data.list.length对应respon.map.list.length *!/
-                    for (var i = 0; i < data.music.length; i++) {
-                        var a = i + 1;
-                        str += '<tr>'
-                            + '<td class="number111"  style="padding: 14px;border-bottom: 1px solid #eee; width: 100px;text-align: center;">' + a + '</td>'
-                            + '<td  style="padding: 14px;border-bottom: 1px solid #eee;width: 600px;text-align: center;"><a class=sName' + i + ' href="#">' + data.music[i].name + '</a>' +
-                            '<span class="glyphicon glyphicon-heart" id=sFav' + i + ' style="color: #eee;float: right;"></span></td>'
-                            + '<td style="padding: 14px;border-bottom: 1px solid #eee;width: 300px;text-align: center;"><a href="#">' + data.music[i].singerId + '</a></td>'
-                            + '</tr>';
-
-                        function play(i) {
-
-                            $("table").on('click', '.sName' + i, function () {
-                                fn(i);
-                            });
-                        }
-
-                        play(i);
-
-                        function play1(i) {
-                            $("#sFav").unbind();
-                            $("table").on('click', '#sFav' + i, function () {
-                                fn1(i);
-                                fav(i);
-                            });
-                        }
-
-                        play1(i);
-                        console.log(str)
-                    }
-
-                    function fn(j) {
-                        console.log(data.music[j + 1].id);
-                        $.cookie("song_link", data.music[j].slbumUd, {expires: 7, path: "/"});
-                        $.cookie("song_name", data.music[j].name, {expires: 7, path: "/"});
-                        $.cookie("song_singer", data.music[j].singerId, {expires: 7, path: "/"});
-                        $.cookie("song_photo", data.music[j].musicpic, {expires: 7, path: "/"});
-                        window.location.href = "/QQmusic.html";
-                    }
-
-                    function fn1(j) {
-                        alert(j);
-                        $.cookie("song_id", data.music[j].id, {expires: 7, path: "/"});
-                        $.cookie("song_name", data.music[j].name, {expires: 7, path: "/"});
-                    }
-
-
-                    $("table tbody").html(str);
-                } else if (data.statusCode == "202") {
-                    alert("搜索不到歌曲！");
-                }
-            },
-            error: function (data) {
-                alert(JSON.stringify(data));
-            }
-        })
-    }*///已在mymusic中注释
-
-
     function fav(j) {
-        /*  $.ajax({
-              async: false,
-              url: "/musicLink/addMusicCollect",
-              type: "post",
-              data: {
-                  "songName": $.cookie("song_name"),
-                  "song_id": $.cookie("song_id"),
-                  "user_name": $.cookie("user_name"),
-                  "user_password": $.cookie("user_password"),
-              },
-              success: function (data) {//webspond
-                  if (data.statusCode == "200") {
-                      $('#sFav' + j).css('color', '#ff69b4');
-                      alert("歌曲收藏成功，请去我的音乐查看！")
-
-                      //location.reload();
-                  } else if (data.statusCode == "201") {
-                      alert("亲！您已经收藏这首歌了哦，快去我的音乐中查看吧");
-                  } else if (data.statusCode == "1") {
-                      alert("请先登录您的账号");
-                  }
-              },
-          })*/
-        alert("111");
         var json = ({
             "songName": $.cookie("song_name"),
             "song_id": $.cookie("song_id"),
             "user_name": $.cookie("user_name"),
             "user_password": $.cookie("user_password")
         })
-        alert(json);
         $.post("/musicLink/addMusicCollect", json, function (data) {
             if (data.statusCode == "200") {
                 $('#sFav' + j).css('color', '#ff69b4');
@@ -331,8 +254,6 @@
             }
         }, "json")
     }//已在mymusic中注释
-
-
 </script>
 
 </body>

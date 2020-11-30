@@ -1,18 +1,17 @@
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <title>轻语音乐</title>
+    <title th:text="${music.name}+'/'+${music.singername}">轻语音乐</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
-    <link rel="stylesheet" href="css/index1.css">
-    <link rel="shortcut icon" type="image/x-icon" href="images/logo1.png">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery.cookie.js"></script>
-    <script src="js/jquery.mCustomScrollbar.js"></script>
-    <script src="js/player.js"></script>
+    <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="/css/index1.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/logo1.png">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.cookie.js"></script>
+    <script src="/js/jquery.mCustomScrollbar.js"></script>
+    <script src="/js/player.js"></script>
 </head>
 
 <body style="user-select: none;">
@@ -36,12 +35,38 @@
             <div class="content_list" data-mcs-theme="minimal-dark">
                 <ul id="sNamee">
                     <li class="list_title">
-                        <div class="list_check"><i></i></div>
+                        <!--<input type="checkbox" class="list_check"/>全选-->
                         <div class="list_number"></div>
                         <div class="list_name">歌曲</div>
                         <div class="list_singer">歌手</div>
                         <div class="list_time">时长</div>
                     </li>
+                    <li th:each="musiclist:${musiclist_infos}" class="list_music">
+                        <!--<div class="list_check"><i></i></div>-->
+                        <div class="list_number"></div>
+                        <div id="sName" th:onclick="|sel(${musiclist.musicId})|"
+                             th:text="${musiclist.musics.get(0).name}" class="list_name"
+                             style="cursor: pointer;">
+                        </div>
+                        <div th:text="${musiclist.musics.get(0).singername}" class="list_singer">
+                        </div>
+                        <div><a th:href="@{'/del?id='+${musiclist.id}+'&song_id='+${music.id}}"><span
+                                class="glyphicon glyphicon-trash"></span></a>
+                        </div>
+                        <div class="list_time"><span class="time1"></span></div>
+                    </li>
+
+
+                    <!--<li th:each="musiclist:${musiclist_infos}" class="list_title">
+                        <div class="list_check"><i></i></div>
+                        <div class="list_number"></div>
+                        <div th:text="${musiclist.musics.get(0).name}" th:onclick="sel(${musiclist.musics.get(0).id})"
+                             style="cursor: pointer;"
+                             class="list_name">歌曲
+                        </div>
+                        <div th:text="${musiclist.musics.get(0).singerId}" class="list_singer">歌手</div>
+                        <div class="list_time">时长</div>
+                    </li>-->
 
                 </ul>
             </div>
@@ -49,14 +74,15 @@
         <div class="content_right">
             <div class="song_info" style="margin: 100px">
                 <a href="javascript:;" class="song_info_pic">
-                    <img class="song_img" src="images/2.jpg" alt="" width="200px" height="200px">
+                    <img class="song_img" th:src="${music.musicpic}" src="/images/2.jpg" alt="" width="200px"
+                         height="200px">
                 </a>
                 <div class="song_info_name ">歌曲名称：
-                    <a class="songName" href="javascript:;">
+                    <a class="songName" th:text="${music.name}" href="javascript:;">
                     </a>
                 </div>
                 <div class="song_info_singer">歌 手 名 ：
-                    <a class="songSinger" href="javascript:;">
+                    <a class="songSinger" th:text="${music.singername}" href="javascript:;">
                     </a>
                 </div>
                 <div class="song_info_ablum">专辑名称：
@@ -72,22 +98,26 @@
 </div>
 <div class="footer">
     <div class="footer_in">
-        <a href="javascript:;" class="music_pre"></a>
+        <a th:href="@{/myMusic/pre(song_id=${music.id})}" class="music_pre"></a>
         <a href="javascript:;" class="music_play music_play2"></a>
-        <a href="javascript:;" class="music_next"></a>
+        <a th:href="@{/myMusic/next(song_id=${music.id})}" class="music_next"></a>
         <div class="music_progress_info">
             <div class="music_progress_top">
-                <span class="music_progress_name">一吻天荒 / 胡歌</span>
+                <span class="music_progress_name" th:text="${music.name}+'/'+${music.singername}">一吻天荒 / 胡歌</span>
                 <span class="music_progress_time">00:00 / 00:00</span></div>
             <div class="music_progress_bar">
+                <!--onclick="setCurTime()"-->
                 <div class="music_progress_line">
                     <div class="music_progress_dot"></div>
                 </div>
             </div>
+            <!--  <audio controls="controls"
+                     autoplay style="width: 500px;border: 0px;"
+                     th:src="|/music/${music.address}|"></audio>-->
         </div>
         <a href="javascript:;" class="music_mode "></a>
         <a href="javascript:;" class="music_fav "></a>
-        <a href="javascript:;" class="music_down"></a>
+        <a th:href="@{/down.do(filename=${music.address})}" class="music_down"></a>
         <a href="javascript:;" class="music_comment"></a>
         <a href="javascript:;" class="music_only "></a>
         <div class="music_voice_info">
@@ -102,82 +132,23 @@
     </div>
 </div>
 <div class="mask_bg">
-    <img class="song_img" src="images/touxiang2.jpg" alt="" width="100%" height="100%">
+    <img class="song_img" src="/images/touxiang2.jpg" alt="" width="100%" height="100%">
 </div>
 <div class="mask"></div>
-<audio id="audio" src=""></audio>
-<script src="js/index.js"></script>
-<script>
+<audio id="audio" th:src="|/music/${music.address}|" autoplay></audio>
+<script src="/js/index.js"></script>
+<script type="text/javascript">
     //工作原理代码见inde.js
-    getList2();
+    //getList2();
+    function sel(id) {
+        // var id = $(".id").val();
+        location.href = "/myMusic/getMyMusicList?song_id=" + id;
+    }
 
-    function getList2() {
-        $.ajax({
-            url: "myMusic/getMyMusicList",
-            type: "POST",
-            data: {
-                "user_name": $.cookie("user_name"),
-                "user_password": $.cookie("user_password"),
-                "song_id": $.cookie("song_id"),
-            },
-            success: function (data) {
-                if (data.statusCode == "200") {
-                    var str = '';
-                    /* data.data.list.length对应respon.map.list.length */
-                    for (var i = 0; i < data.data.list.length; i++) {
-                        var a = i + 1;
-                        str += '<li class="list_music">\n' +
-                            '                        <div class="list_number">' + a + '</div>\n' +
-                            '                        <div id= sName' + i + ' class="list_name" style="cursor: pointer;">' + data.data.list[i].my_songName +
-                            '<span class="glyphicon glyphicon-trash" id=sFav' + i + ' style="color: rgba(255,255,255,0.5);float: right;margin-right: 20px;cursor: pointer;"></span>' +
-                            '                        </div>\n' +
-                            '                        <div class="list_singer">' + data.data.list[i].my_singer + '</div>\n' +
-                            '                        <div class="list_time"><span class="time1">4:36</span>\n' +
-                            '                    </li>';
+    function del(id) {
+        alert();
+    }
 
-                        function play(i) {
-                            $("#sNamee").on('click', '#sName' + i, function () {
-                                fn(i);
-                            });
-                        }
-
-                        play(i);
-
-                        function play1(i) {
-                            $("#sNamee").on('click', '#sFav' + i, function () {
-                                fn1(i);
-                                dle();
-                            });
-                        }
-
-                        play1(i);
-                    }
-
-                    function fn(j) {
-
-                        $.cookie("song_link", data.data.list[j].my_songLink, {expires: 7, path: "/"});
-                        $.cookie("song_name", data.data.list[j].my_songName, {expires: 7, path: "/"});
-                        $.cookie("song_singer", data.data.list[j].my_singer, {expires: 7, path: "/"});
-                        $.cookie("song_photo", data.data.list[j].my_photoLink, {expires: 7, path: "/"});
-                        window.location.href = "/QQmusic.html";
-                    }
-
-                    function fn1(j) {
-
-                        $.cookie("ml_id", data.data.list[j].my_id, {expires: 7, path: "/"});
-                    }
-
-
-                    $("#sNamee").html(str);
-                } else if (data.statusCode == "202") {
-                    alert("您还没有收藏歌曲哦，快去列表收藏吧！");
-                }
-            },
-            error: function (data) {
-                alert(JSON.stringify(data));
-            }
-        })
-    }//已在mymusic中注释
 
     function dle() {
         $.ajax({
@@ -202,5 +173,37 @@
 
         })
     }//已在mymusic中注释
+
+
+    // function enhanceVideoSeek(e){
+    //     clearInterval(progressFlag);
+    //     var length = e.pageX - progressWrap.offsetLeft;
+    //     var percent = length / progressWrap.offsetWidth;
+    //     playProgress.style.width = percent * (progressWrap.offsetWidth) - 2 + "px";
+    //     video.currentTime = percent * video.duration;
+    //     progressFlag = setInterval(getProgress, 60);
+    // }
+    //
+    // function videoSeek(e){
+    //     if(video.paused || video.ended){
+    //         play();
+    //         enhanceVideoSeek(e);
+    //     }
+    //     else{
+    //         // 这句代码是控制允不允许点击进度条的； 不开启，就禁掉了点击事件快进快退
+    //         enhanceVideoSeek(e);
+    //     }
+    //
+    // }
+
+
+    /* function settime() {
+         alert("11111");
+         var width = $(this).css("width");
+         var duration = $("#audio").duration;
+         var currentTime = width / 100 * duration;
+         $("#audio").currentTime = currentTime;
+
+     }*/
 </script>
 </body>

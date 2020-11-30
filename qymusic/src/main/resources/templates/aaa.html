@@ -1,0 +1,240 @@
+<!--<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+&lt;!&ndash;<img src="musicpic\1.jpg">&ndash;&gt;
+&lt;!&ndash;<audio controls="controls"
+       autoplay style="width: 500px;"
+       src="/music/老王乐队-我还年轻我还年轻.mp3"></audio>&ndash;&gt;
+
+
+&lt;!&ndash;<a href="/down.do?filename=我还年轻.jpg"> xaizai</a>&ndash;&gt;
+</body>-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        .audiojindu {
+            position: absolute;
+            left: 0.1rem;
+            right: 0.05rem;
+            bottom: 1.0rem;
+            height: 0.78rem;
+        }
+
+        .mood {
+            position: absolute;
+            top: 8.0rem;
+            left: 1.0rem;
+            right: 1.0rem;
+            line-height: 0.40rem;
+            font-size: 0.26rem;
+            color: #FFFFFF;
+            text-align: center;
+            height: 2.0rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .playcontrol {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0.78rem;
+            height: 0.78rem;
+            background: url(../img/controlbj.png) 0 0 no-repeat;
+            -webkit-background-size: 100% 100%;
+            background-size: 100% 100%;
+            border-right: 2px solid #908f8d;
+        }
+
+        #imgcontrol {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 0.39rem;
+            height: 0.39rem;
+            margin-left: -0.195rem;
+            margin-top: -0.195rem;
+        }
+
+        .jindu {
+            position: absolute;
+            left: 0.8rem;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: url(../img/jinbj.png) 0 0 no-repeat;
+            -webkit-background-size: 100% 100%;
+            background-size: 100% 100%;
+        }
+
+        .qstime {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0.65rem;
+            height: 0.78rem;
+            font-size: 0.2rem;
+            text-align: center;
+            color: white;
+            line-height: 0.78rem;
+        }
+
+        .endtime {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 0.65rem;
+            height: 0.78rem;
+            font-size: 0.2rem;
+            text-align: center;
+            color: white;
+            line-height: 0.78rem;
+        }
+
+        .jindutiao {
+            position: absolute;
+            left: 0.76rem;
+            right: 0.76rem;
+            top: 0.38rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .ssjd {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0.0rem;
+            background-color: red;
+            border-bottom: 2px solid #ff3153;
+            -webkit-transition: width ease-out 0.3s;
+            -o-transition: width ease-out 0.3s;
+            transition: width ease-out 0.3s;
+        }
+
+        @-webkit-keyframes circle {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .yuan {
+            position: absolute;
+            left: 100%;
+            top: -0.1rem;
+            width: 0.24rem;
+            margin-left: -0.12rem;
+            height: 0.24rem;
+            border-radius: 0.12rem;
+            background-color: #ff3153;
+            border: 2px solid rgba(0, 0, 0, 0.7);
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<script src="/js/jquery.min.js"></script>
+<body>
+
+<div class="audiojindu">
+    <div class="playcontrol">
+        <img id="imgcontrol" src="img/paly.png" alt=""/>
+    </div>
+    <div class="jindu">
+        <div class="qstime">
+            00:00
+        </div>
+        <div class="endtime">
+            05:31
+        </div>
+        <div class="jindutiao">
+            <div class="ssjd">
+                <div class="yuan"></div>
+            </div>
+        </div>
+    </div>
+    <audio id="audio" src="/music/老王乐队-我还年轻我还年轻.mp3"></audio>
+</div>
+</body>
+</html>
+<script>
+    var audioPlayer = document.querySelector('#audio');
+    var jindutiao = document.querySelector(".jindutiao");
+    var yuan = document.querySelector(".yuan");
+    var ssjd = document.querySelector(".ssjd");
+
+    //歌曲时长格式转化
+    function timeToStr(time) {
+        var m = 0,
+            s = 0,
+            _m = '00',
+            _s = '00';
+        time = Math.floor(time % 3600);
+        m = Math.floor(time / 60);
+        s = Math.floor(time % 60);
+        _s = s < 10 ? '0' + s : s + '';
+        _m = m < 10 ? '0' + m : m + '';
+        return _m + ":" + _s;
+    }
+
+    var zongTime = 0;
+
+    //歌曲可以播放的监听事件
+    audioPlayer.oncanplay = function () {
+        $(".endtime").html(timeToStr(audioPlayer.duration))
+        zongTime = audioPlayer.duration;
+    }
+    //进度事件监听
+    audioPlayer.addEventListener("timeupdate", function () {
+        $(".qstime").html(timeToStr(this.currentTime))
+        var baifenbi = this.currentTime / zongTime * 100;
+        var str = baifenbi.toFixed(2) + "%";
+        $(".ssjd").width(str);
+    });
+
+    //播放按钮控制
+    $(".playcontrol").on("click", function () {
+        if (audioPlayer.paused) {
+            console.log("让音频播放")
+            audioPlayer.play()
+            $(".viewimg").addClass("zhuan");
+            $(".playcontrol").empty();
+            $(".playcontrol").append('<img id="imgcontrol" src="img/zanting.png" alt="" />');
+        } else {
+            console.log("让音频暂停")
+            audioPlayer.pause()
+            $(".viewimg").removeClass("zhuan");
+            $(".playcontrol").empty();
+            $(".playcontrol").append('<img id="imgcontrol" src="img/paly.png" alt="" />');
+        }
+    })
+
+    //歌曲播放完的事件监听
+    audioPlayer.onended = function () {
+        audioPlayer.pause()
+        $(".viewimg").removeClass("zhuan");
+        $(".playcontrol").empty();
+        $(".playcontrol").append('<img id="imgcontrol" src="img/paly.png" alt="" />');
+        $(".qstime").html("00:00");
+        $(".ssjd").width("0%");
+
+    }
+
+    //拖动进度条
+    $(".jindutiao").on('touchend', function (e) {
+        var x = e.originalEvent.changedTouches[0].clientX - $(".jindutiao").offset().left;
+        var X = x < 0 ? 0 : x;
+        var W = $(this).width();
+        var place = X > W ? W : X;
+        audioPlayer.currentTime = (place / W).toFixed(2) * audioPlayer.duration;
+        $(".ssjd").css({width: (place / W).toFixed(2) * 100 + "%"})
+    })
+
+</script>

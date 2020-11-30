@@ -37,4 +37,14 @@ public class MusicServiceImpljjs implements MusicServicejjs {
         }
         return music;
     }
+
+    @Override
+    public Music selectById(Integer id) {
+        Music music = musicMapper.selectByPrimaryKey(id);
+        if (music.getSingerId() != null) {
+            Singer singer = singerMapper.selectByPrimaryKey(music.getSingerId());
+            music.setSingername(singer.getName());
+        }
+        return music;
+    }
 }

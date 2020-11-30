@@ -554,6 +554,76 @@ public class MusicExample {
             return (Criteria) this;
         }
 
+        public Criteria andDurationIsNull() {
+            addCriterion("duration is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDurationIsNotNull() {
+            addCriterion("duration is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDurationEqualTo(String value) {
+            addCriterion("duration =", value, "duration");
+            return (Criteria) this;
+        }
+
+        public Criteria andDurationNotEqualTo(String value) {
+            addCriterion("duration <>", value, "duration");
+            return (Criteria) this;
+        }
+
+        public Criteria andDurationGreaterThan(String value) {
+            addCriterion("duration >", value, "duration");
+            return (Criteria) this;
+        }
+
+        public Criteria andDurationGreaterThanOrEqualTo(String value) {
+            addCriterion("duration >=", value, "duration");
+            return (Criteria) this;
+        }
+
+        public Criteria andDurationLessThan(String value) {
+            addCriterion("duration <", value, "duration");
+            return (Criteria) this;
+        }
+
+        public Criteria andDurationLessThanOrEqualTo(String value) {
+            addCriterion("duration <=", value, "duration");
+            return (Criteria) this;
+        }
+
+        public Criteria andDurationLike(String value) {
+            addCriterion("duration like", value, "duration");
+            return (Criteria) this;
+        }
+
+        public Criteria andDurationNotLike(String value) {
+            addCriterion("duration not like", value, "duration");
+            return (Criteria) this;
+        }
+
+        public Criteria andDurationIn(List<String> values) {
+            addCriterion("duration in", values, "duration");
+            return (Criteria) this;
+        }
+
+        public Criteria andDurationNotIn(List<String> values) {
+            addCriterion("duration not in", values, "duration");
+            return (Criteria) this;
+        }
+
+        public Criteria andDurationBetween(String value1, String value2) {
+            addCriterion("duration between", value1, value2, "duration");
+            return (Criteria) this;
+        }
+
+        public Criteria andDurationNotBetween(String value1, String value2) {
+            addCriterion("duration not between", value1, value2, "duration");
+            return (Criteria) this;
+        }
+
         public Criteria andMusicpicIsNull() {
             addCriterion("musicpic is null");
             return (Criteria) this;

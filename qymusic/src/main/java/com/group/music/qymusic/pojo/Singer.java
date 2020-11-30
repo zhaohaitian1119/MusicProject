@@ -1,8 +1,5 @@
 package com.group.music.qymusic.pojo;
 
-import java.util.Date;
-import java.util.List;
-
 public class Singer {
     private Integer id;
 
@@ -10,18 +7,17 @@ public class Singer {
 
     private String nationality;
 
-    private Date birthday;
+    private String birthday;
 
     private String introduce;
-    /*private List<Music> musiclist;
 
-    public List<Music> getMusiclist() {
-        return musiclist;
-    }
+    private String names;
 
-    public void setMusiclist(List<Music> musiclist) {
-        this.musiclist = musiclist;
-    }*/
+    private String classify;
+
+    private String coverimage;
+
+    private String homeimage;
 
     public Integer getId() {
         return id;
@@ -47,12 +43,12 @@ public class Singer {
         this.nationality = nationality == null ? null : nationality.trim();
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday == null ? null : birthday.trim();
     }
 
     public String getIntroduce() {
@@ -61,5 +57,37 @@ public class Singer {
 
     public void setIntroduce(String introduce) {
         this.introduce = introduce == null ? null : introduce.trim();
+    }
+
+    public String getNames() {
+        return names;
+    }
+
+    public void setNames(String names) {
+        this.names = names == null ? null : names.trim();
+    }
+
+    public String getClassify() {
+        return classify;
+    }
+
+    public void setClassify(String classify) {
+        this.classify = classify == null ? null : classify.trim();
+    }
+
+    public String getCoverimage() {
+        return coverimage;
+    }
+
+    public void setCoverimage(String coverimage) {
+        this.coverimage = coverimage == null ? null : coverimage.trim();
+    }
+
+    public String getHomeimage() {
+        return homeimage;
+    }
+
+    public void setHomeimage(String homeimage) {
+        this.homeimage = homeimage == null ? null : homeimage.trim();
     }
 }

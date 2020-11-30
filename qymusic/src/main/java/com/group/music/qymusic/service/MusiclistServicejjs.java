@@ -9,4 +9,6 @@ public interface MusiclistServicejjs {
     int insert(Musiclist musiclist);
 
     List<Musiclist> selectByType(String type);
+
+
 }

@@ -1,5 +1,6 @@
 package com.group.music.qymusic.mapper;
 
+import com.group.music.qymusic.pojo.Music;
 import com.group.music.qymusic.pojo.Musiclist_info;
 import com.group.music.qymusic.pojo.Musiclist_infoExample;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,7 @@ public interface Musiclist_infoMapper {
     int updateByPrimaryKeySelective(Musiclist_info record);
 
     int updateByPrimaryKey(Musiclist_info record);
+
+
+    List<Musiclist_info> selectByMusicListid(Integer musicListId);
 }
