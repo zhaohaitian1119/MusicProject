@@ -97,9 +97,7 @@ public class jjsController {
         }*/
         Integer userId = 1;
         List<User_music> user_musics = user_musicServicejjs.selectByuserId(userId);
-
         List<Musiclist> musiclists = musiclistServicejjs.selectByType("0");
-
         for (int i = 0; i < musiclists.size(); i++) {
             for (User_music user_music : user_musics) {
                 if (musiclists.get(i).getId() == user_music.getMusiclistId()) {
@@ -116,8 +114,6 @@ public class jjsController {
                     }
                 }
             }
-
-
         }
         /*int insert = musiclistServicejjs.insert(new Musiclist(null, "我喜欢的", "/static/images/图片/我喜欢的.jpg", "收藏你喜欢的音乐", 0, "0"));
         if (insert > 0) {
@@ -354,6 +350,7 @@ public class jjsController {
         comment.setCommenttime(new Date());
         comment.setMessige(message);
         comment.setMusiclistId(musiclistId);
+        comment.setGoods(0);
         int insert = commentServicejjs.insert(comment);
         if (insert > 0) {
             map.put("success", "1");
@@ -364,6 +361,7 @@ public class jjsController {
         }
     }
 
+    //点赞
     @ResponseBody
     @RequestMapping("/updGoods")
     public Map<String, Object> updGoods(Integer id) {
@@ -373,7 +371,26 @@ public class jjsController {
         int i = commentServicejjs.updGoods(comment);
         if (i > 0) {
             map.put("success", "1");
-            map.put("comment",comment);
+            map.put("comment", comment);
+            return map;
+        } else {
+            map.put("success", "2");
+            return map;
+
+        }
+    }
+
+    //取消点赞
+    @ResponseBody
+    @RequestMapping("/updGoodsNext")
+    public Map<String, Object> updGoodsNext(Integer id) {
+        Map<String, Object> map = new HashMap<>();
+        Comment comment = commentServicejjs.selectById(id);
+        comment.setGoods(comment.getGoods() - 1);
+        int i = commentServicejjs.updGoods(comment);
+        if (i > 0) {
+            map.put("success", "1");
+            map.put("comment", comment);
             return map;
         } else {
             map.put("success", "2");

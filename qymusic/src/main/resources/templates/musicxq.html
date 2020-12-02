@@ -12,12 +12,11 @@
     <link rel="stylesheet" href="css/index.css">
     <style>
         #div1 {
-            border: 1px solid red;
-            height: 1400px;
+            border: 0px solid red;
         }
 
         #div2 {
-            border: 1px solid blue;
+            border: 0px solid blue;
             width: 65%;
             height: 320px;
             margin: 0 auto;
@@ -96,22 +95,23 @@
 
         #a1:hover {
             background: #2CAF6F;
-            color: black;
+            color: white;
         }
 
         #div6 {
-            border: 1px solid blue;
+            border: 0px solid blue;
             width: 65%;
             height: 420px;
             margin: 0 auto;
             margin-top: 5px;
+            margin-bottom: 20px;
         }
 
         #div7 {
-            border: 1px solid red;
-            height: 300px;
+            border: 0px solid red;
             width: 750px;
             float: left;
+            margin-bottom: 50px;
         }
 
         #div8 {
@@ -157,16 +157,14 @@
         }
 
         #div10 {
-            border: 1px solid blue;
+            border: 0px solid blue;
             width: 65%;
-            height: 620px;
             margin: 0 auto;
             margin-top: 5px;
         }
 
         #div11 {
             border: 0px solid red;
-            height: 300px;
             width: 750px;
             float: left;
         }
@@ -209,14 +207,16 @@
             float: right;
         }
 
+        #a2:hover {
+            background: #2CAF6F;
+        }
+
         .div1 {
             clear: both;
         }
 
         #div13 {
             border: 0px solid red;
-            height: 300px;
-            width: 750px;
             float: left;
         }
 
@@ -229,21 +229,21 @@
         .pinglun1 {
             border: 0px solid red;
             width: 747px;
-            height: 150px;
         }
 
         .pinglun2 {
             border: 0px solid black;
             width: 50px;
-            height: 150px;
             float: left;
             text-align: center;
+
         }
 
         .img2 {
             width: 40px;
             height: 40px;
             border-radius: 50%;
+            margin-top: 20px;
         }
 
         .pinglun3 {
@@ -251,27 +251,71 @@
             float: left;
             width: 690px;
             padding-top: 7px;
+            color: #b5b5b5;
             height: 35px;
+            padding-left: 10px;
         }
 
         .pinglun4 {
-            border: 0px solid red;
-            float: left;
-            width: 690px;
-            padding-top: 7px;
-            height: 90px;
-        }
-
-        .pinglun5 {
-            border: 0px solid red;
+            border: 0px solid black;
             float: left;
             width: 690px;
             padding-top: 0px;
+            padding-left: 10px;
+        }
+
+        .pinglun5 {
+            border-bottom: 1px #eee solid;
+            float: left;
+            width: 100%;
+            margin-top: 10px;
+            padding-top: 0px;
             height: 25px;
+            padding-left: 60px;
+            color: #a7a7a7;
+        }
+
+        .div14 {
+            clear: both;
+        }
+
+        #p6 {
+            border: 0px solid red;
+            display: inline;
+            float: right;
+            position: relative;
+            bottom: 15px;
+            right: 10px;
+        }
+        #d2{
+            border: 0px solid red;
+        }
+        #pp11{
+            float: left;
         }
     </style>
 </head>
 <body>
+<script>
+    function fun4() {
+        // var user=$("#userSession_comment").val();
+        // if (user==null||user==undefined||user==""){
+        //     alert("请先登录!")
+        // }else{
+        $.post("/fbpl",
+            $("#comment_user").serialize(),
+            function (data) {
+                if (data == true) {
+                    alert("评论成功！");
+                    window.location.reload();
+                } else {
+                    alert("评论成功！");
+                    window.location.reload();
+                }
+            });
+        // }
+    }
+</script>
 <!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!---
 
                                                       模态框（Modal）
@@ -341,7 +385,7 @@
                                                      首页头部
 
 --><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!---->
-<div style="width: 100%;height: 80px; background-color:#fff;position: relative;border: 1px solid black;">
+<div style="width: 100%;height: 80px; background-color:#fff;position: relative;">
     <div style="position: absolute;bottom: -5px;height: 5px;width: 100%;background-color:#fff;z-index: -1;"></div>
     <div class="search1">
         <div class="logo1" style="width: 153px; padding: 20.6px 0; display: inline-block;"><img src="images/logo2.png"
@@ -388,7 +432,7 @@
                                                    下方nav标签导航栏开始）
 
 --><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!---->
-<nav class="daohanglan" style="">
+<nav class="daohanglan" style="ba">
     <div class="big3">
         <ul>
             <li><a class=" erjicaidan2" href="/index.html  ">首页</a></li>
@@ -423,23 +467,33 @@
 <div id="div1">
     <div id="div2">
         <div id="div3">
-            <img src="/images/music/1.png" id="img1">
+            <img th:src="@{${musicxq.musicpic}}" id="img1">
         </div>
         <div id="div4">
-            <h2 id="h1">归尘装(《九州缥缈录》吕归尘同人曲)</h2>
-            <p id="p1"><span class="span1">歌手:</span><span class="span1">刘鸿军</span></p>
-            <p id="p2"><span class="span1">专辑:</span><span class="span1">刘鸿军</span></p>
-            <p id="p3"><span class="span1">播放量:</span><span class="span1">刘鸿军</span></p>
+            <h2 id="h1" th:text="${musicxq.name}"></h2>
+            <p id="p1"><span class="span1">歌手:</span><span class="span1" th:text="${musicxq.singername}">刘鸿军</span></p>
+            <p id="p2"><span class="span1">专辑:</span><span class="span1" th:text="${musicxq.slbumUd}">刘鸿军</span></p>
+            <p id="p3"><span class="span1">播放量:</span><span class="span1" th:text="${musicxq.clickvolume}">刘鸿军</span>
+            </p>
             <div id="div5">
-                <a href="#" id="a1" class="a1">播放</a>
-                <a href="#" class="a1 a2">收藏</a>
+                <a th:href="@{/selMusic(id=${musicxq.id})}" id="a1" class="a1">播放</a>
+                <a href="#" class="a1 a2" th:onclick="|addMusicList(${musicxq.id})|">收藏</a>
                 <a href="#" class="a1 a2">评论</a>
             </div>
         </div>
     </div>
     <div id="div6">
         <div id="div7">
-            歌词
+            <div id="d1">
+                <div id="fullText">
+                    <p th:each="s:${strings}" th:text="${s}"></p>
+                </div>
+                <div id="subText">
+
+                </div>
+                <a id="btn" onclick="change()" style="color: blue;"></a>
+
+            </div>
         </div>
         <div id="div8">
             <p id="p4">相关热门歌单</p>
@@ -470,56 +524,56 @@
                 </div>
             </div>
         </div>
+        <div class="div14"></div>
     </div>
     <div id="div10">
         <div id="div11">
-            <p><span id="span3">评论</span> <span id="span4">共389条评论</span></p>
+            <p><span id="span3">评论</span> <span id="span4">共[[${sum}]]条评论</span></p>
             <div id="div12">
-                <form>
-                    <textarea id="text1" placeholder="期待你的神评论..."></textarea>
-                    <a href="#" id="a2">发表评论</a>
+                <form method="post" id="comment_user">
+                    <input type="hidden" name="userId" th:value="1">
+                    <input type="hidden" name="musicId" th:value="${musicxq.id}">
+                    <textarea id="text1" name="messige" placeholder="期待你的神评论..."></textarea>
+                    <a onclick="fun4()" id="a2">发表评论</a>
                 </form>
 
             </div>
             <div class="div1"></div>
             <div id="div13">
-                <p id="p5">精彩评论<span>(29)</span></p>
+                <p id="p5">精彩评论</p>
                 <hr>
                 <!--评论-->
-                <div class="pinglun1">
+                <div class="pinglun1" th:each="comments:${comments}">
                     <div class="pinglun2">
-                        <img class="img2" src="/images/music/1.png">
+                        <img class="img2" th:src="@{${comments.user_info.img}}">
                     </div>
-                    <div class="pinglun3">
-                        用户名
+                    <div class="pinglun3" th:text="${comments.user_info.username}">
                     </div>
-                    <div class="pinglun4">
+
+                    <div class="pinglun4" th:text="${comments.messige}">
                         银装素裏两茫茫，少年驰骋于天地之间长刀出鞘斩敌寇，英雄诞生于乱世。青阳世子，沉静若水，谱正气之曲，书九州传奇。
                         天选之命，策马归来，铁甲依然在。 乱世开局，亮干戈而不由己，长使英雄叹。 丁酉年十一月戊子，赤幕即启，少年遇,闹南淮逐沙场，
                         后世心向往之。跟随青阳世子吕归尘•阿苏勒•帕苏尔, 踏上北陆，开启征程。
                     </div>
+
                     <div class="pinglun5">
-                        2020年11月30日
+                        <div id="d2">
+                            <p id="pp11" th:text="${#dates.format(comments.commenttime,'yyyy年MM月dd日')}"></p>
+                            <p id="p6">
+                                <button type="button" th:id="|button1${comments.id}|"
+                                        th:onclick="|updGood(${comments.id})|"
+                                        th:class="|btn btn-default btn-sm ${comments.id}|">
+                                    <span th:id="|span6${comments.id}|"
+                                          class="glyphicon glyphicon-thumbs-up"></span><span
+                                        th:id="|span5${comments.id}|" th:text="${comments.goods}"></span>
+                                </button>
+                            </p>
+                        </div>
                     </div>
+
+                    <div class="div14"></div>
                 </div>
-                <hr>
-                <div class="pinglun1">
-                    <div class="pinglun2">
-                        <img class="img2" src="/images/music/1.png">
-                    </div>
-                    <div class="pinglun3">
-                        用户名
-                    </div>
-                    <div class="pinglun4">
-                        银装素裏两茫茫，少年驰骋于天地之间长刀出鞘斩敌寇，英雄诞生于乱世。青阳世子，沉静若水，谱正气之曲，书九州传奇。
-                        天选之命，策马归来，铁甲依然在。 乱世开局，亮干戈而不由己，长使英雄叹。 丁酉年十一月戊子，赤幕即启，少年遇,闹南淮逐沙场，
-                        后世心向往之。跟随青阳世子吕归尘•阿苏勒•帕苏尔, 踏上北陆，开启征程。
-                    </div>
-                    <div class="pinglun5">
-                        2020年11月30日
-                    </div>
-                </div>
-                <hr>
+
             </div>
         </div>
 
@@ -530,7 +584,7 @@
                                                    最后 页脚
 
 --><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!---->
-<div class="footer" style="border: 0px solid white;margin-top: 0px">
+<div class="footer" style="border: 0px solid white;margin-top: 50px">
     <div class="links">
         <a hidefocus="true" href="#" target="_blank">关于轻语</a>|
         <a hidefocus="true" href="#" id="report">监督举报</a> |
@@ -565,7 +619,9 @@
                target="_blank"></a>
         </p>
     </div>
+
 </div>
+<div class="div14"></div>
 <script src="js/jquery.min.js?v=2.1.4"></script>
 <script src="js/bootstrap-paginator.min.js"></script>
 <script src="js/jquery.validate.min.js"></script>
@@ -597,6 +653,93 @@
         }
     });
 
+
+</script>
+
+<script>
+
+
+    var text;
+
+    function show() {
+        text = document.getElementById("fullText").innerHTML;
+        document.getElementById("fullText").innerHTML = "";
+        document.getElementById("subText").style.float = "left";
+        document.getElementById("btn").style.float = "left";
+        if (text.length > 100) {
+            document.getElementById("subText").innerHTML = text.substring(0, 500);
+            document.getElementById("btn").innerHTML = "...显示全部";
+        } else {
+            document.getElementById("subText").innerHTML = text;
+            document.getElementById("btn").innerHTML = "";
+        }
+    }
+
+    function change() {
+        var t = document.getElementById("btn");
+        var tt = document.getElementById("subText");
+        if (t.innerHTML == "...显示全部") {
+            tt.innerHTML = text;
+            t.innerHTML = "收起"
+        } else {
+            tt.innerHTML = text.substring(0, 500);
+            t.innerHTML = "...显示全部"
+        }
+    }
+
+    show();
+
+    function addMusicList(id) {
+        var json = {
+            "song_id": id
+        }
+        $.post("/musicLink/addMusicCollect", json, function (data) {
+            if (data.statusCode == "200") {
+                $('#sFav' + id).css('color', '#ff69b4');
+                alert("歌曲收藏成功，请去我的音乐查看！")
+
+                //location.reload();
+            } else if (data.statusCode == "201") {
+                alert("亲！您已经收藏这首歌了哦，快去我的音乐中查看吧");
+            } else if (data.statusCode == "1") {
+                alert("请先登录您的账号");
+            }
+        }, "json")
+
+    }
+
+    function updGood(id) {
+        alert(id);
+        $.post("/updGoods", {"id": id}, function (data) {
+            if (data != null) {
+                if (data.success == "1") {
+                    $("#span6" + id).css("color", "red");
+                    $("#span5" + id).text(data.comment.goods);
+                    $("#button1" + id).attr("onclick", "updGoods(" + data.comment.id + ")");
+                } else {
+                    alert("失敗");
+                }
+            }
+
+        }, "json")
+    }
+
+    function updGoods(id) {
+        $.post("/updGoodsNext", {"id": id}, function (data) {
+            if (data != null) {
+                if (data.success == "1") {
+                    $("#span6" + id).css("color", "");
+                    $("#span5" + id).text(data.comment.goods);
+                    $("#button1" + id).attr("onclick", "updGood" +
+                        "(" + data.comment.id + ")");
+                } else {
+                    alert("失敗");
+                }
+            }
+
+        }, "json")
+
+    }
 
 </script>
 </body>

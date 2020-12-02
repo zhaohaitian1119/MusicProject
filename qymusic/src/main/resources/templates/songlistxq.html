@@ -426,7 +426,8 @@
             <p id="p3"><span class="span1">播放量:</span><span class="span1" th:text="${musiclist.clickvolume}">刘鸿军</span>
             </p>
             <div id="div5">
-                <a th:href="${musiclist_info!=null}?@{/myMusic/next(song_id=(0),musicListId=(${musiclist_infos.get(0).musiclistId}))}"
+                <!--${musiclist_info!=null}?-->
+                <a th:href="@{/myMusic/next(song_id=(0),musicListId=(${musiclist_infos.get(0).musiclistId}))}"
                    id="a1"
                    class="a1">全部播放</a>
                 <a href="#" class="a1 a2" th:onclick="|shoucang(${musiclist.id})|">收藏</a>
@@ -447,7 +448,8 @@
                     <td style="text-align: center;width: 50px;"></td>
                     <td style="text-align: left;height:50px;font-size: 15px;"><a style="color:black"
                                                                                  th:text="${list.getMusics().get(0).getName()}"
-                                                                                 href="#"> 1</a>
+                                                                                 th:href="@{/selMusic(id=${list.musicId})}">
+                        1</a>
                     </td>
                     <td style="text-align: left;font-size: 15px;"><a style="color:black"
                                                                      th:text="${list.getMusics().get(0).getSingername()}">1</a>
@@ -572,7 +574,7 @@
                         <button type="button" th:id="|button1${c.id}|" th:onclick="|updGood(${c.id})|"
                                 th:class="|btn btn-default btn-sm ${c.id}|">
                             <span th:id="|span6${c.id}|" class="glyphicon glyphicon-thumbs-up"></span><span
-                                th:id="|span5${c.id}|"></span>
+                                th:id="|span5${c.id}|" th:text="${c.goods}"></span>
                         </button>
                     </p>
                 </div>
@@ -749,6 +751,23 @@
             }
 
         }, "json")
+    }
+
+    function updGoods(id) {
+        $.post("/updGoodsNext", {"id": id}, function (data) {
+            if (data != null) {
+                if (data.success == "1") {
+                    $("#span6" + id).css("color", "");
+                    $("#span5" + id).text(data.comment.goods);
+                    $("#button1" + id).attr("onclick", "updGood" +
+                        "(" + data.comment.id + ")");
+                } else {
+                    alert("失敗");
+                }
+            }
+
+        }, "json")
+
     }
 
 </script>

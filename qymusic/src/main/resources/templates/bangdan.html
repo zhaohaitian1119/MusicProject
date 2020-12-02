@@ -13,7 +13,7 @@
 
 
 </head>
-<body style="overflow-x: hidden;user-select: none;">
+<body style="overflow-x: hidden;user-select: none;" >
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
      style="overflow: auto;">
     <div class="modal-dialog" style="overflow: auto;">
@@ -173,16 +173,12 @@
             </div>
             <div id="collapseOne" class="panel-collapse collapse in">
                 <div class="panel-body">
-                    <a href="">轻语音乐榜</a>
-                    <a href="">飙升榜单</a>
-                    <a href="">TOP50榜单</a>
-                    <a href="">网络音乐榜</a>
-                    <a href="">电影音乐榜</a>
-                    <a href="">DJ热歌榜</a>
-                    <a href="">欧美新歌榜</a>
-                    <a href="">中国梦之声榜</a>
-                    <a href="">国风美少年榜</a>
-                    <a href="">粤语新歌榜</a>
+                    <a th:href="@{qingyu1}">轻语音乐榜</a>
+                    <a th:href="@{qingyu2}">飙升榜单</a>
+                    <a th:href="@{qingyu3}">TOP30榜单</a>
+                    <a th:href="@{qingyu4}">网络音乐榜</a>
+                    <a th:href="@{qingyu5}">电影音乐榜</a>
+                    <a th:href="@{qingyu6}">欧美新歌榜</a>
                 </div>
             </div>
         </div>
@@ -191,22 +187,18 @@
                 <h4 class="panel-title">
 				<span class="nonostyle" data-toggle="collapse" data-parent="#accordion"
                       href="#collapseTwo">
-					欧美音乐榜
+					特色音乐榜
                     </span>
                 </h4>
             </div>
             <div id="collapseTwo" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <a href="">轻语音乐榜</a>
-                    <a href="">飙升榜单</a>
-                    <a href="">TOP50榜单</a>
-                    <a href="">网络音乐榜</a>
-                    <a href="">电影音乐榜</a>
-                    <a href="">DJ热歌榜</a>
-                    <a href="">欧美新歌榜</a>
-                    <a href="">中国梦之声榜</a>
-                    <a href="">国风美少年榜</a>
-                    <a href="">粤语新歌榜</a>
+                    <a th:href="@{qingyu7}">电音热歌榜</a>
+                    <a th:href="@{qingyu8}">影视金曲榜</a>
+                    <a th:href="@{qingyu9}">说唱榜</a>
+                    <a th:href="@{qingyu10}">粤语金曲榜</a>
+                    <a th:href="@{qingyu1}">欧美金曲榜</a>
+                    <a th:href="@{qingyu1}">动漫音乐榜</a>
                 </div>
             </div>
         </div>
@@ -215,65 +207,38 @@
                 <h4 class="panel-title">
                     <span style="cursor: pointer" class="nonostyle" data-toggle="collapse" data-parent="#accordion"
                           href="#collapseThree">
-                        新曲音乐榜
+                        全球榜
                         </span>
                 </h4>
             </div>
             <div id="collapseThree" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <a href="">轻语音乐榜</a>
-                    <a href="">飙升榜单</a>
-                    <a href="">TOP50榜单</a>
-                    <a href="">网络音乐榜</a>
-                    <a href="">电影音乐榜</a>
-                    <a href="">DJ热歌榜</a>
-                    <a href="">欧美新歌榜</a>
-                    <a href="">中国梦之声榜</a>
-                    <a href="">国风美少年榜</a>
-                    <a href="">粤语新歌榜</a>
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-				<span class="nonostyle" data-toggle="collapse" data-parent="#accordion"
-                      href="#collapseFour">
-					歌手排行榜
-				</span>
-                </h4>
-            </div>
-            <div id="collapseFour" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <a href="">轻语音乐榜</a>
-                    <a href="">飙升榜单</a>
-                    <a href="">TOP50榜单</a>
-                    <a href="">网络音乐榜</a>
-                    <a href="">电影音乐榜</a>
-                    <a href="">DJ热歌榜</a>
-                    <a href="">欧美新歌榜</a>
-                    <a href="">中国梦之声榜</a>
-                    <a href="">国风美少年榜</a>
-                    <a href="">粤语新歌榜</a>
+                    <a th:href="@{qingyu1}">美国BillBoard榜</a>
+                    <a th:href="@{qingyu1}">英国单曲榜</a>
+                    <a th:href="@{qingyu1}">日本公信榜</a>
+                    <a th:href="@{qingyu1}">韩国Melon榜</a>
+                    <a th:href="@{qingyu1}">joox本地热歌榜</a>
+                    <a th:href="@{qingyu1}">台湾KKBOX风云榜</a>
+                    <a th:href="@{qingyu1}">日本SPACE SHOWER榜</a>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <table style="width: 1000px; float: right; overflow: auto;">
-        <thead>
+    <table style="width: 1000px; float: right; overflow: auto;" border="0px">
         <tr style="border-bottom: 1px solid #919191;line-height: 35px;">
-            <th style="text-align: center;">序号</th>
-            <th style="text-align: center;">歌名</th>
-            <th style="text-align: center;">歌手</th>
-            <th></th>
+            <td style="text-align: left;"></td>
+            <td style="text-align: left;">歌曲</td>
+            <td style="text-align: left;">歌手</td>
+            <td style="text-align: left;">时长</td>
         </tr>
-        </thead>
-        <tbody>
-        <tr>
+        <tr  th:each="music:${musicPageInfo.list}">
+            <td  style="text-align: center;width: 50px;"></td>
+            <td style="text-align: left;height: 80px;font-size: 15px;width: 500px;"><a style="color:black" th:href="@{musicxq(id=${music.id})}"><img th:src="@{${music.musicpic}}" width="70px" height="70px"> [[${music.name}]]</a></td>
+            <td style="text-align: left;font-size: 15px;"><a style="color:black" th:href="@{singerxq(singerid=${music.singerId})}">[[${music.singername}]]</a></td>
+            <td style="text-align: left;font-size: 15px;" th:text="${music.duration}"></td>
         </tr>
-        </tbody>
     </table>
 
 
@@ -353,7 +318,7 @@
                 $("table tbody").html(str);
             },
             error: function (data) {
-                alert(JSON.stringify(data));
+                // alert(JSON.stringify(data));
             }
         })
     }//已在mymusic中注释
@@ -425,6 +390,40 @@
         return (zero + num).slice(-digit);
     }
 </script>
+<script type="text/javascript">
+    window.onload = function(){
+
+        var aLi = document.getElementsByTagName('tr');
+        for(var i=0;i<aLi.length;i++){
+            if(i%2==0){
+                aLi[i].style.background = '#F9F9F9';
+            }
+            else{
+                aLi[i].style.background = '#FDFDFD';
+            }
+        }
+
+        var p1= document.getElementsByTagName('p');
+        for(var i = 1;i<=30;i++){
+            p1.innerHTML=i;
+        }
+
+
+    }
+
+    $(function(){
+        var len = $('table tr').length;
+        for(var i = 1;i<len;i++){
+
+            $('table tr:eq('+i+') td:first').text(i);
+            $("table tr:eq(1) td:first").css({"color":"red","font-size":"20px"});
+            $("table tr:eq(2) td:first").css({"color":"red","font-size":"20px"});
+            $("table tr:eq(3) td:first").css({"color":"red","font-size":"20px"});
+        }
+
+    });
+</script>
+
 </body>
 </html>
 
