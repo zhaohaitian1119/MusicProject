@@ -1,5 +1,6 @@
 package com.group.music.qymusic.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.group.music.qymusic.mapper.MusiclistMapper;
 import com.group.music.qymusic.pojo.Musiclist;
 import com.group.music.qymusic.pojo.MusiclistExample;
@@ -28,5 +29,24 @@ public class MusiclistServiceImpljjs implements MusiclistServicejjs {
         criteria.andTypeEqualTo(type);
         List<Musiclist> musiclists = musiclistMapper.selectByExample(example);
         return musiclists;
+    }
+
+    @Override
+    public List<Musiclist> selectByTypeAndClick(String type, Integer pageSize, Integer pageNum) {
+        PageHelper.startPage(pageNum, pageSize);
+        MusiclistExample example = new MusiclistExample();
+        MusiclistExample.Criteria criteria = example.createCriteria();
+        if ("".equals(type) == false) {
+            criteria.andTypeEqualTo(type);
+        }
+        PageHelper.orderBy("clickvolume desc");
+        List<Musiclist> musiclists = musiclistMapper.selectByExample(example);
+        return musiclists;
+    }
+
+    @Override
+    public Musiclist selectById(Integer musicListId) {
+        Musiclist musiclist = musiclistMapper.selectByPrimaryKey(musicListId);
+        return musiclist;
     }
 }

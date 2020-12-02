@@ -13,7 +13,7 @@ public class MyConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("index.html");
+//        registry.addViewController("/").setViewName("index.html");
         registry.addViewController("/bangdan.html").setViewName("bangdan.html");
         registry.addViewController("/musician.html").setViewName("musician.html");
         registry.addViewController("/musicRadio.html").setViewName("musicRadio.html");
@@ -27,5 +27,7 @@ public class MyConfig implements WebMvcConfigurer {
         registry.addViewController("/songlist.html").setViewName("songlist.html");
         registry.addViewController("/test.html").setViewName("test.html");
         registry.addViewController("/aaa.html").setViewName("aaa.html");
+        registry.addViewController("/musicxq.html").setViewName("musicxq.html");
+        registry.addViewController("/songlistxq.html").setViewName("songlistxq.html");
     }
 }

@@ -10,5 +10,7 @@ public interface MusiclistServicejjs {
 
     List<Musiclist> selectByType(String type);
 
+    List<Musiclist> selectByTypeAndClick(String type, Integer pageSize, Integer pageNum);
 
+    Musiclist selectById(Integer musicListId);
 }

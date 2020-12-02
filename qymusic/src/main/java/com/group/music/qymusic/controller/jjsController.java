@@ -3,13 +3,14 @@ package com.group.music.qymusic.controller;
 import com.fasterxml.jackson.databind.ser.std.IterableSerializer;
 import com.group.music.qymusic.pojo.*;
 import com.group.music.qymusic.service.*;
+import com.sun.org.apache.bcel.internal.generic.IMPDEP1;
 import javafx.scene.control.Alert;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import sun.util.resources.cldr.ti.CalendarData_ti_ER;
 
 import javax.annotation.Resource;
@@ -17,11 +18,10 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.server.PathParam;
 import java.io.*;
 import java.nio.file.Files;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class jjsController {
@@ -35,6 +35,20 @@ public class jjsController {
     User_musicServicejjs user_musicServicejjs;
     @Resource
     Musiclist_infoServicejjs musiclist_infoServicejjs;
+
+    @Resource
+    CommentServicejjs commentServicejjs;
+
+    @RequestMapping("")
+    public String toIndex(@RequestParam(value = "type", required = false, defaultValue = "") String type,
+                          @RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum, Model model) {
+        Integer pageSize = 10;
+        List<Musiclist> musiclists = musiclistServicejjs.selectByTypeAndClick(type, pageSize, pageNum);
+        if (musiclists.size() > 0) {
+            model.addAttribute("musiclists", musiclists);
+        }
+        return "index";
+    }
 
 
     //搜索音乐
@@ -51,6 +65,13 @@ public class jjsController {
         return map;
     }
 
+//    @RequestMapping("/selByMusicName")
+//    public String selByMusicName(String songName, Model model) {
+//        List<Music> musiclist_infos = musicServicejjs.selectByName(songName);
+//        model.addAttribute("musiclist_infos", musiclist_infos);
+//        return "MusicListInfo";
+//    }
+
     public Integer selMudicList(Integer userId, String type) {
         List<User_music> user_musics = user_musicServicejjs.selectByuserId(userId);
         List<Musiclist> musiclists = musiclistServicejjs.selectByType(type);
@@ -66,18 +87,15 @@ public class jjsController {
 
     @ResponseBody
     @RequestMapping("/musicLink/addMusicCollect")
-    public Map<String, Object> addMusicCollect(String songName, Integer song_id, String user_name, String user_password, HttpSession session) {
+    public Map<String, Object> addMusicCollect(Integer song_id, HttpSession session) {
         Map<String, Object> map = new HashMap<>();
-        user_name = "忆往昔";
+
         //验证是否登录
         /*if (user_name == null || "".equals(user_name)) {
             map.put("statusCode", "1");
             return map;
         }*/
-        User_info user_info = user_infoServicejjs.selectByuserName(user_name);
-        //得到用戶id
-        Integer userId = user_info.getUserId();
-
+        Integer userId = 1;
         List<User_music> user_musics = user_musicServicejjs.selectByuserId(userId);
 
         List<Musiclist> musiclists = musiclistServicejjs.selectByType("0");
@@ -153,14 +171,16 @@ public class jjsController {
         }
     }
 
-
+    //播放单个音乐的控制器
     @RequestMapping("/selMusic")
     public String selMusic(Integer id, Model model) {
         Music music = musicServicejjs.selectById(id);
         model.addAttribute("music", music);
+        System.out.println(music.getName());
         return "QQmusic";
     }
 
+    //删除用户我喜欢的音乐
     @RequestMapping("/del")
     public String del(Integer id, Integer song_id, Model model) {
         musiclist_infoServicejjs.del(id);
@@ -179,6 +199,7 @@ public class jjsController {
         }
     }
 
+    //下载音乐
     @ResponseBody
     @RequestMapping("/down.do")
     public void fileDownload(HttpServletResponse response, HttpServletRequest request, String filename) {
@@ -210,12 +231,19 @@ public class jjsController {
         }
     }
 
+    //切换下首歌
     @RequestMapping("/myMusic/next")
-    public String music_next(Integer song_id, HttpSession session, Model model) {
+    public String music_next(Integer song_id, Integer musicListId, HttpSession session, Model model) {
         //获取session作用域中的用户Id
-        Integer musiclistId = selMudicList(1, "0");
-        System.out.println(musiclistId);
-        List<Musiclist_info> musiclist_infos = musiclist_infoServicejjs.selectByMusicListId(musiclistId);
+//        Integer musiclistId = selMudicList(1, "0");
+//        System.out.println(musiclistId);
+        if (musicListId == null) {
+            Music music = musicServicejjs.selectById(song_id);
+            model.addAttribute("music", music);
+            System.out.println(music.getName());
+            return "QQmusic";
+        }
+        List<Musiclist_info> musiclist_infos = musiclist_infoServicejjs.selectByMusicListId(musicListId);
         model.addAttribute("musiclist_infos", musiclist_infos);
         for (int i = 0; i < musiclist_infos.size(); i++) {
             if (musiclist_infos.get(i).getMusicId() == song_id) {
@@ -228,21 +256,27 @@ public class jjsController {
                     model.addAttribute("music", music);
                     return "QQmusic";
                 }
-            } else {
-                Music music = musicServicejjs.selectById(musiclist_infos.get(0).getMusicId());
-                model.addAttribute("music", music);
-                return "QQmusic";
             }
         }
+
+        Music music = musicServicejjs.selectById(musiclist_infos.get(0).getMusicId());
+        model.addAttribute("music", music);
         return "QQmusic";
     }
 
+    //切换上首歌
     @RequestMapping("/myMusic/pre")
-    public String music_pre(Integer song_id, HttpSession session, Model model) {
+    public String music_pre(Integer song_id, Integer musicListId, HttpSession session, Model model) {
+        if (musicListId == null) {
+            Music music = musicServicejjs.selectById(song_id);
+            model.addAttribute("music", music);
+            System.out.println(music.getName());
+            return "QQmusic";
+        }
         //获取session作用域中的用户Id
-        Integer musiclistId = selMudicList(1, "0");
-        System.out.println(musiclistId);
-        List<Musiclist_info> musiclist_infos = musiclist_infoServicejjs.selectByMusicListId(musiclistId);
+     /*   Integer musiclistId = selMudicList(1, "0");
+        System.out.println(musiclistId);*/
+        List<Musiclist_info> musiclist_infos = musiclist_infoServicejjs.selectByMusicListId(musicListId);
         model.addAttribute("musiclist_infos", musiclist_infos);
         for (int i = 0; i < musiclist_infos.size(); i++) {
             if (musiclist_infos.get(i).getMusicId() == song_id) {
@@ -255,12 +289,97 @@ public class jjsController {
                     model.addAttribute("music", music);
                     return "QQmusic";
                 }
-            } else {
-                Music music = musicServicejjs.selectById(musiclist_infos.get(0).getMusicId());
-                model.addAttribute("music", music);
-                return "QQmusic";
             }
+
         }
+        Music music = musicServicejjs.selectById(musiclist_infos.get(0).getMusicId());
+        model.addAttribute("music", music);
         return "QQmusic";
     }
+
+    //根据歌单id展示歌单中的音乐
+    @RequestMapping("/selMusicList")
+    public String selMusicList(Integer musicListId, Model model) {
+        List<Musiclist_info> musiclist_infos = musiclist_infoServicejjs.selectByMusicListId(musicListId);
+        model.addAttribute("musiclist_infos", musiclist_infos);
+        return "MusicListInfo";
+    }
+
+    //歌单详情页面相关信息控制器
+    @RequestMapping("/selMusicList/getMusic")
+    public String selMusicListAndGetMusic(Integer musicListId, Model model) {
+        Musiclist musiclist = musiclistServicejjs.selectById(musicListId);
+        model.addAttribute("musiclist", musiclist);
+        List<Musiclist_info> musiclist_infos = musiclist_infoServicejjs.selectByMusicListId(musicListId);
+        if (musiclist_infos.size() == 0) {
+            musiclist_infos = null;
+        }
+        model.addAttribute("musiclist_infos", musiclist_infos);
+        List<Comment> comments = commentServicejjs.selectByMusicListId(musicListId);
+        model.addAttribute("count", comments.size());
+        model.addAttribute("comments", comments);
+
+        return "songlistxq";
+    }
+
+    //用户收藏歌单控制器
+    @ResponseBody
+    @RequestMapping("/getUser/addmusiclist")
+    public Map<String, Object> addUserMusiclist(Integer musiclistId, HttpSession session) {
+        Map<String, Object> map = new HashMap<>();
+        //获取用户Id
+        int i = user_musicServicejjs.selectByuserIdAndMusicListId(1, musiclistId);
+        if (i > 0) {
+            map.put("success", "0");//此用户以收藏此歌单
+            return map;
+        }
+        int add = user_musicServicejjs.add(1, musiclistId);
+        if (add > 0) {
+            map.put("success", "1");//收藏成功
+            return map;
+        } else {
+            map.put("success", "3");//添加失败
+            return map;
+        }
+    }
+
+    //增加评论
+    @ResponseBody
+    @RequestMapping("/CommentADD")
+    public Map<String, Object> commentADD(Integer musiclistId, String message, HttpSession session) {
+
+        Map<String, Object> map = new HashMap<>();
+        Comment comment = new Comment();
+        comment.setUserId(1);
+        comment.setCommenttime(new Date());
+        comment.setMessige(message);
+        comment.setMusiclistId(musiclistId);
+        int insert = commentServicejjs.insert(comment);
+        if (insert > 0) {
+            map.put("success", "1");
+            return map;
+        } else {
+            map.put("success", "2");
+            return map;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping("/updGoods")
+    public Map<String, Object> updGoods(Integer id) {
+        Map<String, Object> map = new HashMap<>();
+        Comment comment = commentServicejjs.selectById(id);
+        comment.setGoods(comment.getGoods() + 1);
+        int i = commentServicejjs.updGoods(comment);
+        if (i > 0) {
+            map.put("success", "1");
+            map.put("comment",comment);
+            return map;
+        } else {
+            map.put("success", "2");
+            return map;
+
+        }
+    }
+
 }

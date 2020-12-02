@@ -501,6 +501,126 @@ public class CommentExample {
             addCriterion("parent_id not between", value1, value2, "parentId");
             return (Criteria) this;
         }
+
+        public Criteria andMusiclistIdIsNull() {
+            addCriterion("musiclist_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusiclistIdIsNotNull() {
+            addCriterion("musiclist_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusiclistIdEqualTo(Integer value) {
+            addCriterion("musiclist_id =", value, "musiclistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusiclistIdNotEqualTo(Integer value) {
+            addCriterion("musiclist_id <>", value, "musiclistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusiclistIdGreaterThan(Integer value) {
+            addCriterion("musiclist_id >", value, "musiclistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusiclistIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("musiclist_id >=", value, "musiclistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusiclistIdLessThan(Integer value) {
+            addCriterion("musiclist_id <", value, "musiclistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusiclistIdLessThanOrEqualTo(Integer value) {
+            addCriterion("musiclist_id <=", value, "musiclistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusiclistIdIn(List<Integer> values) {
+            addCriterion("musiclist_id in", values, "musiclistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusiclistIdNotIn(List<Integer> values) {
+            addCriterion("musiclist_id not in", values, "musiclistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusiclistIdBetween(Integer value1, Integer value2) {
+            addCriterion("musiclist_id between", value1, value2, "musiclistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMusiclistIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("musiclist_id not between", value1, value2, "musiclistId");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsIsNull() {
+            addCriterion("goods is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsIsNotNull() {
+            addCriterion("goods is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsEqualTo(Integer value) {
+            addCriterion("goods =", value, "goods");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsNotEqualTo(Integer value) {
+            addCriterion("goods <>", value, "goods");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsGreaterThan(Integer value) {
+            addCriterion("goods >", value, "goods");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsGreaterThanOrEqualTo(Integer value) {
+            addCriterion("goods >=", value, "goods");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsLessThan(Integer value) {
+            addCriterion("goods <", value, "goods");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsLessThanOrEqualTo(Integer value) {
+            addCriterion("goods <=", value, "goods");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsIn(List<Integer> values) {
+            addCriterion("goods in", values, "goods");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsNotIn(List<Integer> values) {
+            addCriterion("goods not in", values, "goods");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsBetween(Integer value1, Integer value2) {
+            addCriterion("goods between", value1, value2, "goods");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsNotBetween(Integer value1, Integer value2) {
+            addCriterion("goods not between", value1, value2, "goods");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

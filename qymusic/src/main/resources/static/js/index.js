@@ -101,7 +101,7 @@ $(function () {
 });
 
 // var $progressLine = $(".music_progress_line");
-$(".music_progress_line").change(function () {
+/*$(".music_progress_line").change(function () {
     var width = $(".music_progress_line").css("width");
     var index = width.split("px");
     var stas = index[0];
@@ -109,9 +109,8 @@ $(".music_progress_line").change(function () {
     var st = stas / s;
     var currentTime = st / 100 * duration;
     document.getElementById("#audio").currentTime = currentTime;
-})
+})*/
 
-/*
 function setCurTime() {
     var width = $(".music_progress_line").css("width");
     var index = width.split("px");
@@ -119,7 +118,6 @@ function setCurTime() {
     var s = 665 / 100;
     var st = stas / s;
     var currentTime = st / 100 * duration;
-    document.getElementById("#audio").currentTime = currentTime;
+    document.getElementById("audio").currentTime = currentTime;
     // console.log(document.getElementById("#audio").currentTime)
-
-}*/
+}

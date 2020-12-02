@@ -30,4 +30,21 @@ public class Admin {
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
     }
+
+
+    /*
+    *
+    *    private User_info user_info;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public User_info getUser_info() {
+        return user_info;
+    }
+
+    public void setUser_info(User_info user_info) {
+        this.user_info = user_info;
+    }*/
 }

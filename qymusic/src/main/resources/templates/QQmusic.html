@@ -98,17 +98,19 @@
 </div>
 <div class="footer">
     <div class="footer_in">
-        <a th:href="@{/myMusic/pre(song_id=${music.id})}" class="music_pre"></a>
+        <a th:href="@{/myMusic/pre(song_id=${music.id},musicListId=${musiclist_infos!=null}?${musiclist_infos.get(0).getMusiclistId()})}"
+           class="music_pre"></a>
         <a href="javascript:;" class="music_play music_play2"></a>
-        <a th:href="@{/myMusic/next(song_id=${music.id})}" class="music_next"></a>
+        <a th:href="@{/myMusic/next(song_id=${music.id},musicListId=${musiclist_infos!=null}?${musiclist_infos.get(0).getMusiclistId()})}"
+           class="music_next"></a>
         <div class="music_progress_info">
             <div class="music_progress_top">
                 <span class="music_progress_name" th:text="${music.name}+'/'+${music.singername}">一吻天荒 / 胡歌</span>
                 <span class="music_progress_time">00:00 / 00:00</span></div>
             <div class="music_progress_bar">
                 <!--onclick="setCurTime()"-->
-                <div class="music_progress_line">
-                    <div class="music_progress_dot"></div>
+                <div onclick="setCurTime()" class="music_progress_line">
+                    <div onclick="setCurTime()" class="music_progress_dot"></div>
                 </div>
             </div>
             <!--  <audio controls="controls"
@@ -204,6 +206,15 @@
          var currentTime = width / 100 * duration;
          $("#audio").currentTime = currentTime;
 
+     }*/
+    /*$(".music_voice_icon").click(function () {
+        alert("11");
+        $(this).attr("class", "music_voice_icon 11");
+    })*/
+
+    /* function setvalue() {
+         var $audio = $("audio");
+         audio.muted = true;
      }*/
 </script>
 </body>

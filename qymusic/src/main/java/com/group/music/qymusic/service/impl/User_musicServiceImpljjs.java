@@ -23,4 +23,23 @@ public class User_musicServiceImpljjs implements User_musicServicejjs {
         List<User_music> user_musics = user_musicMapper.selectByExample(example);
         return user_musics;
     }
+
+    @Override
+    public int add(Integer userId, Integer musicListId) {
+        User_music user_music = new User_music();
+        user_music.setUserId(userId);
+        user_music.setMusiclistId(musicListId);
+        int insert = user_musicMapper.insert(user_music);
+        return insert;
+    }
+
+    @Override
+    public int selectByuserIdAndMusicListId(int userId, Integer musiclistId) {
+        User_musicExample example = new User_musicExample();
+        User_musicExample.Criteria criteria = example.createCriteria();
+        criteria.andUserIdEqualTo(userId);
+        criteria.andMusiclistIdEqualTo(musiclistId);
+        int i = user_musicMapper.countByExample(example);
+        return i;
+    }
 }

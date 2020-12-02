@@ -49,7 +49,7 @@
     <div class="col-sm-12">
         <div class="ibox float-e-margins">
             <div class="content_toolbar" style="border: 0px solid red;margin-left: 165px">
-                <span class="glyphicon glyphicon-heart-empty"> 收 藏</span>
+                <span class="glyphicon glyphicon-play">播放全部</span>
                 <span class="glyphicon glyphicon-plus-sign"> 添加到</span>
                 <span class="glyphicon glyphicon-download-alt"> 下 载</span>
                 <span class="glyphicon glyphicon-trash"> 删 除</span>
@@ -215,7 +215,7 @@
                     $.cookie("song_id", data.music[j].id, {expires: 7, path: "/"});
                     $.cookie("song_name", data.music[j].name, {expires: 7, path: "/"});
                     /* window.location.href = "/QQmusic.html";*/
-                    location.href = "/myMusic/getMyMusicList?song_id=" + data.music[j].id;
+                    location.href = "/selMusic?id=" + data.music[j].id;
                 }
 
                 function fn1(j) {

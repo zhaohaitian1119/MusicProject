@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>歌手</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/singer.css">
+    <link rel="shortcut icon" type="image/x-icon" href="images/logo1.png">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        #div1 {
+            border: 1px solid red;
+            height: 1400px;
+        }
+
+        #div2 {
+            border: 1px solid blue;
+            width: 65%;
+            height: 320px;
+            margin: 0 auto;
+            margin-top: 5px;
+        }
+
+        #div3 {
+            float: left;
+            width: 300px;
+            height: 100%;
+            border: 0px solid red;
+            text-align: center;
+        }
+
+        #img1 {
+
+            height: 305px;
+            width: 252px;
+        }
+
+        #div4 {
+            width: 800px;
+            height: 100%;
+            border: 0px solid red;
+            float: left;
+            margin-left: 35px;
+        }
+
+        #h1 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .span1 {
+            font-size: 17px;
+        }
+
+        #p2, #p3 {
+            border: 0px solid red;
+            margin-top: 10px;
+        }
+
+        #div5 {
+            margin-top: 20px;
+            border: 0px solid red;
+            height: 100px;
+        }
+
+        .a1 {
+            margin-top: 25px;
+            padding-top: 10px;
+            display: inline-block;
+
+            height: 40px;
+            width: 120px;
+            text-align: center;
+            font-weight: normal;
+            color: black;
+        }
+
+        .a2 {
+            border: 1px solid #c9c9c9;
+        }
+
+        .a2:hover {
+            background: #ededed;
+            color: black;
+        }
+
+        #a1 {
+            margin-left: 40px;
+            border: 1px solid #31C27C;
+            background: #31C27C;
+            color: white;
+        }
+
+        #a1:hover {
+            background: #2CAF6F;
+            color: black;
+        }
+
+        #div6 {
+            border: 1px solid blue;
+            width: 65%;
+            height: 420px;
+            margin: 0 auto;
+            margin-top: 5px;
+        }
+
+        #div7 {
+            border: 1px solid red;
+            height: 300px;
+            width: 750px;
+            float: left;
+        }
+
+        #div8 {
+            border: 0px solid black;
+            height: 300px;
+            width: 450px;
+            float: right;
+        }
+
+        #p4 {
+            font-size: 20px;
+            margin-left: 10px;
+        }
+
+        #div9 {
+            border: 0px solid red;
+            height: 200px;
+        }
+
+        .gendan1 {
+            border: 0px solid blue;
+            float: left;
+            width: 145px;
+            height: 150px;
+        }
+
+        .gendan2 {
+            border: 0px solid blue;
+            float: left;
+            margin: 0 auto;
+        }
+
+        .gendan3 {
+            border: 0px solid blue;
+            float: left;
+            margin-left: 20px;
+        }
+
+        .img1 {
+            margin-left: 10px;
+            width: 120px;
+            height: 120px;
+        }
+
+        #div10 {
+            border: 1px solid blue;
+            width: 65%;
+            height: 620px;
+            margin: 0 auto;
+            margin-top: 5px;
+        }
+
+        #div11 {
+            border: 0px solid red;
+            height: 300px;
+            width: 750px;
+            float: left;
+        }
+
+        #span3 {
+            font-size: 25px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        #span4 {
+            font-size: 15px;
+            color: silver;
+        }
+
+        #div12 {
+            border: 0px solid red;
+        }
+
+        #text1 {
+            background: #F5F5F5;
+            width: 400px;
+            height: 150px;
+            max-width: 747px;
+            min-width: 747px;
+            min-height: 120px;
+            max-height: 120px;
+        }
+
+        #a2 {
+            border: 1px solid #31C27C;
+            padding-top: 10px;
+            background: #31C27C;
+            color: white;
+            display: inline-block;
+            height: 40px;
+            width: 80px;
+            text-align: center;
+            font-weight: normal;
+            float: right;
+        }
+
+        .div1 {
+            clear: both;
+        }
+
+        #div13 {
+            border: 0px solid red;
+            height: 300px;
+            width: 750px;
+            float: left;
+        }
+
+        #p5 {
+            font-size: 18px;
+            margin-left: 10px;
+            margin-bottom: 15px;
+        }
+
+        .pinglun1 {
+            border: 0px solid red;
+            width: 747px;
+            height: 150px;
+        }
+
+        .pinglun2 {
+            border: 0px solid black;
+            width: 50px;
+            height: 150px;
+            float: left;
+            text-align: center;
+        }
+
+        .img2 {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .pinglun3 {
+            border: 0px solid red;
+            float: left;
+            width: 690px;
+            padding-top: 7px;
+            height: 35px;
+        }
+
+        .pinglun4 {
+            border: 0px solid red;
+            float: left;
+            width: 690px;
+            padding-top: 7px;
+            height: 90px;
+        }
+
+        .pinglun5 {
+            border: 0px solid red;
+            float: left;
+            width: 690px;
+            padding-top: 0px;
+            height: 25px;
+        }
+    </style>
+</head>
+<body>
+<!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!---
+
+                                                      模态框（Modal）
+
+--><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!---->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     style="overflow: auto;">
+    <div class="modal-dialog" style="overflow: auto;">
+        <div class="modal-content" style="overflow: auto;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="false">X</button>
+                <h4 class="modal-title" id="myModalLabel">账号密码登录</h4>
+            </div>
+            <div class="modal-body" style="position: relative;">
+                <form id="test" class="form-horizontal" role="form" action="/user/loginPage" method="post"
+                      style="padding-left: 50px;">
+                    <div class="form-group">
+                        <img src="images/logo2.png" style="display: block; padding: 20px 151px">
+                        <div class="erweima"><img src="images/二维码2.jpg" style="position: absolute;width: 130px;
+						height: 130px;bottom: 136px;right: 31px;">
+                            <p style="position: absolute;right: 64px;bottom: 106px;">联系我们</p>
+                        </div>
+                        <label class="col-sm-2 control-label">
+                            <span class="glyphicon glyphicon-user">账号</span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="user_name" name="user_name"
+                                   placeholder="手机号/QQ号/微信" style="width: 250px">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            <span class="glyphicon glyphicon-lock">密码</span>
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="user_password" name="user_password"
+                                   placeholder="password" style="width: 250px">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> 记住密码
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-dismiss="btn btn-default"
+                                    style="background-color: #169af3;padding: 5px 30px">登 &nbsp&nbsp&nbsp&nbsp录
+                            </button>
+                            <a href="/register.html" style="float: left;padding-top: 12px;">没有账号？点此注册</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!---
+
+                                                     首页头部
+
+--><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!---->
+<div style="width: 100%;height: 80px; background-color:#fff;position: relative;border: 1px solid black;">
+    <div style="position: absolute;bottom: -5px;height: 5px;width: 100%;background-color:#fff;z-index: -1;"></div>
+    <div class="search1">
+        <div class="logo1" style="width: 153px; padding: 20.6px 0; display: inline-block;"><img src="images/logo2.png"
+                                                                                                alt=""><a href=""></a>
+        </div>
+        <nav class="navmargin navbar navbar-default" role="navigation">
+            <div class="shurukuang" style="padding: 20.6px 30px;">
+                <form class="bs-example" role="form" action="#" method="get">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="中国好声音">
+                                <span class="input-group-btn">
+								<button class="btn btn-default" type="submit">
+									Go!
+								</button>
+							</span>
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                    </div><!-- /.row -->
+                </form>
+            </div>
+            <!-- 图标加上搜索框结束 -->
+            <div id="col10" class="dengluzhuce">
+                <a class="mymusic" href="/mymusic.html  ">我的音乐</a>
+                <a class="mymusic" href="/huiyuanzhongxin.html ">会员中心</a>
+                <span class="mymusic">|</span>
+                <img id="touxiang" src="images/touxiang.png" width="40px" height="40px"
+                     style="display: inline-block; width: 40px;height: 40px;border:0;border-radius: 40px;margin-bottom: 5px;">
+                <a id="userName" style="cursor: pointer;" class="mymusic" href="#">
+                    未登录</a>
+                <a id="zhuXiao" onclick="zhuXiao();location.reload();" href="#">
+                </a>
+                <button id="display1" class="btn denglu" data-toggle="modal" data-target="#myModal">登 &nbsp&nbsp录
+                </button> <!--触发模态框按钮-->
+            </div>
+        </nav>
+    </div>
+</div>
+
+
+<!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!---
+
+                                                   下方nav标签导航栏开始）
+
+--><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!---->
+<nav class="daohanglan" style="">
+    <div class="big3">
+        <ul>
+            <li><a class=" erjicaidan2" href="/index.html  ">首页</a></li>
+            <li><a class=" erjicaidan2" href="/bangdan.html">榜单</a></li>
+            <li><a class="erjicaidan2" href="/mv.html   ">MV</a></li>
+            <li class="dropdown">
+                <a class="gudingbeij erjicaidan2 dropdown-toggle" href="#" data-toggle="dropdown">
+                    更多 <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="erjicaidan" href="/musicRadio.html  ">电台</a></li>
+                    <li><a class="erjicaidan" href="/songlist.html  ">歌单</a></li>
+                    <li><a class="erjicaidan" href="#">歌手</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul>
+            <li class="youfudong"><a style="padding: 20px 0px" href="playmusic.html"><span
+                    class="glyphicon glyphicon-shopping-cart" style="font-size: 14px"> 商城</span></a></li>
+            <li class="youfudong"><a style="padding: 20px 0px" href="/musician.html"><span
+                    class="glyphicon glyphicon-headphones" style="font-size: 14px"> 音乐人</span></a></li>
+            <li class="youfudong"><a style="padding: 20px 0px" href="playmusic.html"><span
+                    class="glyphicon glyphicon-music" style="font-size: 14px"> 轻语LIVE</span></a></li>
+            <li class="youfudong"><a style="padding: 20px 0px" href="/QQmusic.html"><span
+                    class="glyphicon glyphicon-star-empty" style="font-size: 14px"> 在线播放</span></a></li>
+        </ul>
+    </div>
+    </div>
+</nav>
+
+
+<div id="div1">
+    <div id="div2">
+        <div id="div3">
+            <img src="/images/music/1.png" id="img1">
+        </div>
+        <div id="div4">
+            <h2 id="h1">归尘装(《九州缥缈录》吕归尘同人曲)</h2>
+            <p id="p1"><span class="span1">歌手:</span><span class="span1">刘鸿军</span></p>
+            <p id="p2"><span class="span1">专辑:</span><span class="span1">刘鸿军</span></p>
+            <p id="p3"><span class="span1">播放量:</span><span class="span1">刘鸿军</span></p>
+            <div id="div5">
+                <a href="#" id="a1" class="a1">播放</a>
+                <a href="#" class="a1 a2">收藏</a>
+                <a href="#" class="a1 a2">评论</a>
+            </div>
+        </div>
+    </div>
+    <div id="div6">
+        <div id="div7">
+            歌词
+        </div>
+        <div id="div8">
+            <p id="p4">相关热门歌单</p>
+            <div id="div9">
+                <div class="gendan1">
+                    <div class="gendan2">
+                        <img class="img1" src="/images/music/1.png">
+                    </div>
+                    <div class="gendan3">
+                        <a href="#">『古风仙侠』我</br>愿为你一人执剑</a>
+                    </div>
+                </div>
+                <div class="gendan1">
+                    <div class="gendan2">
+                        <img class="img1" src="/images/music/1.png">
+                    </div>
+                    <div class="gendan3">
+                        <a href="#">『古风仙侠』我</br>愿为你一人执剑</a>
+                    </div>
+                </div>
+                <div class="gendan1">
+                    <div class="gendan2">
+                        <img class="img1" src="/images/music/1.png">
+                    </div>
+                    <div class="gendan3">
+                        <a href="#">『古风仙侠』我</br>愿为你一人执剑</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="div10">
+        <div id="div11">
+            <p><span id="span3">评论</span> <span id="span4">共389条评论</span></p>
+            <div id="div12">
+                <form>
+                    <textarea id="text1" placeholder="期待你的神评论..."></textarea>
+                    <a href="#" id="a2">发表评论</a>
+                </form>
+
+            </div>
+            <div class="div1"></div>
+            <div id="div13">
+                <p id="p5">精彩评论<span>(29)</span></p>
+                <hr>
+                <!--评论-->
+                <div class="pinglun1">
+                    <div class="pinglun2">
+                        <img class="img2" src="/images/music/1.png">
+                    </div>
+                    <div class="pinglun3">
+                        用户名
+                    </div>
+                    <div class="pinglun4">
+                        银装素裏两茫茫，少年驰骋于天地之间长刀出鞘斩敌寇，英雄诞生于乱世。青阳世子，沉静若水，谱正气之曲，书九州传奇。
+                        天选之命，策马归来，铁甲依然在。 乱世开局，亮干戈而不由己，长使英雄叹。 丁酉年十一月戊子，赤幕即启，少年遇,闹南淮逐沙场，
+                        后世心向往之。跟随青阳世子吕归尘•阿苏勒•帕苏尔, 踏上北陆，开启征程。
+                    </div>
+                    <div class="pinglun5">
+                        2020年11月30日
+                    </div>
+                </div>
+                <hr>
+                <div class="pinglun1">
+                    <div class="pinglun2">
+                        <img class="img2" src="/images/music/1.png">
+                    </div>
+                    <div class="pinglun3">
+                        用户名
+                    </div>
+                    <div class="pinglun4">
+                        银装素裏两茫茫，少年驰骋于天地之间长刀出鞘斩敌寇，英雄诞生于乱世。青阳世子，沉静若水，谱正气之曲，书九州传奇。
+                        天选之命，策马归来，铁甲依然在。 乱世开局，亮干戈而不由己，长使英雄叹。 丁酉年十一月戊子，赤幕即启，少年遇,闹南淮逐沙场，
+                        后世心向往之。跟随青阳世子吕归尘•阿苏勒•帕苏尔, 踏上北陆，开启征程。
+                    </div>
+                    <div class="pinglun5">
+                        2020年11月30日
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!---
+
+                                                   最后 页脚
+
+--><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!---->
+<div class="footer" style="border: 0px solid white;margin-top: 0px">
+    <div class="links">
+        <a hidefocus="true" href="#" target="_blank">关于轻语</a>|
+        <a hidefocus="true" href="#" id="report">监督举报</a> |
+        <a hidefocus="true" href="#" target="_blank">广告服务</a> |
+        <a hidefocus="true" target="_blank" href="#">版权指引</a>|
+        <a target="_blank" href="#">隐私政策</a>|
+        <a hidefocus="true" target="_blank" href="#">用户服务协议</a> |
+        <a hidefocus="true" target="_blank" href="#">推广合作</a> |
+        <a hidefocus="true" target="_blank" href="#">轻语音乐人</a> |
+        <a hidefocus="true" target="_blank" href="#">轻语音乐推</a> |
+        <a hidefocus="true" href="#" target="_blank">招聘信息</a> |
+        <a hidefocus="true" href="#" target="_blank">客服中心</a> |
+        <a hidefocus="true" href="#" target="_blank">用户体验提升计划</a>
+    </div>
+    <div class="copyright">
+        <p style="-moz-user-select: text;-webkit-user-select: text;-ms-user-select: text; user-select:text">
+            我们致力于推动网络正版音乐发展，相关版权合作请联系copyrights@qingyu.com</p>
+        <p>信息网络传播视听节目许可证 1910666 增值电信业务经营许可证粤B2-20066666 &nbsp;&nbsp;&nbsp;<a hidefocus="true" target="_blank"
+                                                                              href="http://www.miitbeian.gov.cn/"></a><span
+                class="footerIcon"><a target="_blank"
+                                      href="http://sq.ccm.gov.cn:80/ccnt/sczr/service/business/emark/toDetail/E64D2439A71544C7B995FC0A53D8F965">&nbsp;&nbsp;&nbsp;&nbsp;</a></span>
+        </p>
+        <p>广播电视节目制作经营许可证（粤）字第01270号&nbsp;&nbsp;&nbsp;&nbsp;营业性演出许可证穗天演440106026</p>
+        <p>穗公网监备案证第44010650010167&nbsp;&nbsp;&nbsp;&nbsp;互联网药品信息服务资格证编号（粤）-非经营性-2012-0018<a style="" target="_blank"
+                                                                                            href="#">&nbsp;&nbsp;&nbsp;<span></span></a>
+        </p>
+        <p style="-moz-user-select: text;-webkit-user-select: text;-ms-user-select: text; user-select:text">
+            不良信息举报邮箱：jubao_music@qingyu.net&nbsp;&nbsp;&nbsp;&nbsp;客服邮箱：kefu@qingyu.net</p>
+        <p>Copyright&nbsp;&nbsp;©&nbsp;&nbsp;2004-2018 QingYu-Inc.All Rights Reserved
+            <a hidefocus="true" class="office-verification"
+               href="http://netadreg.gzaic.gov.cn/ntmm/WebSear/WebLogoPub.aspx?logo=440106106022006022000209"
+               target="_blank"></a>
+        </p>
+    </div>
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap-paginator.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/tools.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script type="text/javascript">
+
+
+    if ($.cookie("user_name") != undefined && $.cookie("user_name") != "1") {
+        $("#userName").text("账号：" + $.cookie("user_name"));
+        $("#zhuXiao").text("注销");
+
+
+        document.getElementById("touxiang").src = "images/touxiang2.jpg";
+        $("#display1").attr("style", "display:none;");
+    }
+
+    $('#test').validate({
+        errorPlacement: function (error, element) {
+            error.appendTo(element.parent());
+        },
+        onfocusout: function (element) {
+            $(element).valid();
+        },
+        submitHandler: function (form) {
+            denglu($('#test').attr("action"), $('#test').serialize());
+
+
+        }
+    });
+
+
+</script>
+</body>
+</html>
