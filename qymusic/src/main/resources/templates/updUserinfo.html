@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/register.css">
+</head>
+
+<body class="gray-bg">
+<div id="nav">
+    <div class="nav">
+        <ul class="n1" id="ulHeader">
+            <li class="home"><a href="/" title="轻语商城"><img src="images/logo2.png" width="170" height="40" alt="轻语音乐"
+                                                           class="logo2">轻语商城</a><span></span></li>
+            <li class="" id="downloadLink"><a href="#" title="下载客户端" target="_blank">下载客户端</a><span></span></li>
+            <li><a href="#" hidefocus="true" title="音乐直播" target="_blank">音乐直播</a><span></span></li>
+            <li><a href="#" title="轻语音乐人" target="_self">轻语音乐人</a><span></span></li>
+        </ul>
+        <ul class="n2 n2_new">
+            <li><a href="#" target="_blank" title="轻语音乐盒2019官方免费下载">产品中心</a><span></span></li>
+            <li><a href="#" target="_blank" title="VIP中心">VIP中心</a><span></span></li>
+            <li><a href="#" target="_blank" title="客服中心">客服中心</a><span></span></li>
+            <li><a th:href="@{/toUpdPassword}" target="_blank" title="修改密码">修改密码</a><span></span></li>
+        </ul>
+    </div>
+</div>
+<div id="content">
+
+    <div class="boxb">
+        <h3><span class="glyphicon glyphicon-star">&nbsp修改信息</span></h3><br/><br/>
+
+
+        <!--修改头像-->
+        <div class="span3 avatar-box">
+            <div class="personal-image">
+                <img th:src="${userinfo.img}" class="avatar img-circle"
+                     onclick="fun1()" width="100px"/>
+                <form id="userform" style="display: none;" method="post" enctype="multipart/form-data"
+                      th:action="@{/updImg}">
+                    <input type="text" name="userId" th:value="${userinfo.userId}"/>
+                    <input type="file" id="userfile" name="file"/>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+
+                        </div>
+                        <div class="ibox-content">
+
+
+                            <form id="test" role="form" th:action="@{/updUserinfo(userId=${session.userId})}"
+                                  method="post">
+                                <input type="hidden" name="userId" th:value="${userinfo.userId}"/>
+                                <!-- 用户名 -->
+                                <div class="form-group">
+                                    <label for="username" class="col-sm-2 control-label">用户名:</label> <!-- 表单 -->
+                                    <div class="col-sm-10" style="margin: 0 0 20px">
+                                        <input type="text" class="form-control" id="username" name="username"
+                                               th:value="${userinfo.username}" placeholder="请输入用户名" size="20">
+                                    </div>
+                                </div>
+
+                                <!-- 性别 -->
+                                <div class="form-group">
+                                    <label for="gender" class="col-sm-2 control-label">性别:</label> <!-- 表单 -->
+                                    <div class="col-sm-10" style="margin: 0 0 20px">
+                                        <select name="gender" class="form-control" th:selected="${userinfo.gender}">
+                                            <option value="男">男</option>
+                                            <option value="女">女</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- 简介 -->
+                                <div class="form-group">
+                                    <label for="introduce" class="col-sm-2 control-label">简介:</label> <!-- 表单 -->
+                                    <div class="col-sm-10" style="margin: 0 0 20px">
+                                        <input type="text" class="form-control" th:value="${userinfo.introduce}"
+                                               id="introduce" name="introduce" placeholder="请输入个人简介" size="20">
+                                    </div>
+                                </div>
+
+                                <!-- 生日 -->
+                                <div class="form-group">
+                                    <label for="birthday" class="col-sm-2 control-label">生日:</label> <!-- 表单 -->
+                                    <div class="col-sm-10" style="margin: 0 0 20px">
+                                        <input type="text" class="form-control"
+                                               th:value="${#dates.format(userinfo.birthday,'yyyy-MM-dd')}" id="birthday"
+                                               name="birthday" placeholder="请输入出生日期" size="20">
+                                    </div>
+                                </div>
+
+                                <!-- 地区 -->
+                                <div class="form-group">
+                                    <label for="region" class="col-sm-2 control-label">地区:</label> <!-- 表单 -->
+                                    <div class="col-sm-10" style="margin: 0 0 20px">
+                                        <input type="text" class="form-control" th:value="${userinfo.region}"
+                                               id="region" name="region" placeholder="请输入所在地区" size="20">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-1 col-sm-10">
+                                        <input type="submit" class="btn btn-primary btn-lg" value="确认修改">
+                                    </div>
+                                </div>
+
+
+                                <!--<div class="form-group">-->
+                                <!--<div class="col-sm-offset-1 col-sm-10" onClick="zhuXiao()">-->
+                                <!--<button type="submit" class="btn btn-primary btn-lg" onClick=" chkAll();">确认修改</button>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap-paginator.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/tools.js"></script>
+<!--<script type="text/javascript">-->
+<!--$('#test').validate({-->
+<!--submitHandler: function() {-->
+<!--setPassWord($('#test').attr("action"), $('#test').serialize());//调用tools里的setPassWord方法-->
+<!--}-->
+<!--});-->
+
+<!--</script>-->
+<div class="footer">
+    <div class="links">
+    </div>
+    <div class="copyright">
+    </div>
+</div>
+</body>
+
+</html>
+<script type="text/javascript">
+    function fun1() {
+        var form = document.getElementById("userform");
+        var file = document.getElementById("userfile");
+        file.click();
+        file.onchange = function () {
+            form.submit();
+        }
+    }
+</script>

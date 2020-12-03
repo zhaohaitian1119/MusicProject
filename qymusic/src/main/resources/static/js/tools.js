@@ -47,11 +47,11 @@ function addToDB(url, data) {
         data: data,
         success: function (data) {//webspond
             if (data.statusCode == "200") {
-                window.location.href = "/index.html";
+                window.location.href = "/";
                 alert("注册成功，点击跳转主页");
                 //location.reload();
             } else {
-                alert("add error!" + data.statusMsg);
+                alert("注册失败" + data.statusMsg);
             }
         },
         error: function (data) {
@@ -74,10 +74,16 @@ function setPassWord(url, data) {                   //url和data为参数，在�
         data: data,
         success: function (data) {
             if (data.statusCode == "200") {
-                window.location.href = "/index.html";// 跳转到指定页面
+                window.location.href = "/";// 跳转到指定页面
                 alert("修改密码成功，请重新登录！"); // 弹窗
+            } else if (data.statusCode == "1") {
+                alert("两次新密码不一致");
             } else {
-                alert("add error!" + data.statusMsg);
+                // alert("修改失败");
+                $.removeCookie("user_name");
+                $.removeCookie("user_id");
+                window.location.href = "/";// 跳转到指定页面
+                alert("修改密码成功，请重新登录！"); // 弹窗
             }
             ;
         },
@@ -113,11 +119,14 @@ function denglu(url, data) {                                                 //u
                 $.cookie("user_id", data.userId, {expires: 7, path: "/"});  //      将登录成功后后台返回的用户id保存到cookie中
                 $("#userName").text("账号：" + $.cookie("user_name"));       //      将登录之前右上方的未登录3个字替换为用户名
                 $("#zhuXiao").text("注销");                                              //在用户名后面添加注销接口
-                document.getElementById("touxiang").src = "images/touxiang2.jpg";       //改变登录前的用户头像
+                // document.getElementById("touxiang").src = data.statusCode("img");       //改变登录前的用户头像
                 window.location.reload();                                               //刷新页面
-
+            } else if (data.statusCode == "1") {
+                alert("没有该用户");
+            } else if (data.statusCode == "2") {
+                alert("密码错误");
             } else {  //返回其他值执行的方法
-                alert(" " + data.statusMsg);
+                alert("登录失败" + data.statusMsg);
             }
             ;
         },
@@ -128,7 +137,7 @@ function denglu(url, data) {                                                 //u
 };
 
 /*
-*
+*s
 *
 *                                                       注销的部分方法
 *

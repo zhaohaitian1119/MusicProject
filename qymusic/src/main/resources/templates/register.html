@@ -36,23 +36,45 @@
                             <div class="ibox-title">
                             </div>
                             <div class="ibox-content">
-                                <form id="test" role="form" action="/user/addOrEditUser" method="post">
+                                <form id="test" role="form" th:action="@{/user/addOrEditUser}" method="post">
+                                    <!-- 手机号 -->
                                     <div class="form-group">
-                                        <!-- 表单 -->
-                                        <label for="username" class="col-sm-2 control-label">用户名:</label> <!-- 表单 -->
+                                        <label for="phone" class="col-sm-2 control-label">手机号:</label> <!-- 表单 -->
                                         <div class="col-sm-10" style="margin: 0 0 20px">
-                                            <input type="text" class="form-control" id="user_name" name="user_name" placeholder="请输入用户名" size="20">
+                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="请输入手机号" size="20">
                                         </div>
                                     </div>
+
+                                    <!-- 验证码 -->
+                                    <div class="form-group">
+                                    <label for="yanzhen" class="col-sm-2 control-label">验证码:</label> <!-- 表单 -->
+                                    <div class="col-sm-10" style="margin: 0 0 20px">
+                                    <input type="text" class="form-control" id="yanzhen" name="yanzhen" placeholder="请输入验证码" size="20" >
+                                    <input type="button" onclick="dophone()" value="发送验证码"/>
+                                    </div>
+                                    </div>
+                                    <!--<input type="text" name="yzm" id="yzm" th:value="${session.suiJi}" />-->
+
+                                    <!-- 密码 -->
                                     <div class="form-group">
                                         <label for="password" class="col-sm-2 control-label">密码:</label>
                                         <div class="col-sm-10" style="margin: 0 0 20px">
-                                            <input type="password" class="form-control" id="user_password" name="user_password" placeholder="请输入密码" size="20">
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" size="20">
                                         </div>
-                                    </div> 
+                                    </div>
+
+                                    <!-- 邮箱 -->
+                                     <div class="form-group">
+                                         <label for="email" class="col-sm-2 control-label">邮箱:</label>
+                                         <div class="col-sm-10" style="margin: 0 0 20px">
+                                             <input type="email" class="form-control" id="email" name="email" placeholder="请输入邮箱" size="20">
+                                         </div>
+                                     </div>
+
                                     <div class="form-group">
                                         <div class="col-sm-offset-1 col-sm-10">
-                                            <button type="submit" class="btn btn-primary btn-lg" onClick="chkAll();">注册</button>
+                                            <button type="submit" class="btn btn-primary btn-lg" onclick="yanzhenma()"  >注册</button>
+                                            <!--onClick="chkAll();" 自带方法-->
                                         </div>
                                     </div>
                                 </form>

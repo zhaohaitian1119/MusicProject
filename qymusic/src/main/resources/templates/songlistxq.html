@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>歌手</title>
+    <title th:text="${musiclist.name}">歌手</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/singer.css">
     <link rel="shortcut icon" type="image/x-icon" href="/images/logo1.png">
@@ -279,11 +279,11 @@
                 <h4 class="modal-title" id="myModalLabel">账号密码登录</h4>
             </div>
             <div class="modal-body" style="position: relative;">
-                <form id="test" class="form-horizontal" role="form" action="/user/loginPage" method="post"
+                <form id="test" class="form-horizontal" role="form" th:action="@{/user/loginPage}" method="post"
                       style="padding-left: 50px;">
                     <div class="form-group">
-                        <img src="images/logo2.png" style="display: block; padding: 20px 151px">
-                        <div class="erweima"><img src="images/二维码2.jpg" style="position: absolute;width: 130px;
+                        <img src="/images/logo2.png" style="display: block; padding: 20px 151px">
+                        <div class="erweima"><img src="/images/二维码2.jpg" style="position: absolute;width: 130px;
 						height: 130px;bottom: 136px;right: 31px;">
                             <p style="position: absolute;right: 64px;bottom: 106px;">联系我们</p>
                         </div>
@@ -362,7 +362,7 @@
                 <a class="mymusic" href="/mymusic.html  ">我的音乐</a>
                 <a class="mymusic" href="/huiyuanzhongxin.html ">会员中心</a>
                 <span class="mymusic">|</span>
-                <img id="touxiang" src="images/touxiang.png" width="40px" height="40px"
+                <img id="touxiang" src="/images/touxiang.png" width="40px" height="40px"
                      style="display: inline-block; width: 40px;height: 40px;border:0;border-radius: 40px;margin-bottom: 5px;">
                 <a id="userName" style="cursor: pointer;" class="mymusic" href="#">
                     未登录</a>

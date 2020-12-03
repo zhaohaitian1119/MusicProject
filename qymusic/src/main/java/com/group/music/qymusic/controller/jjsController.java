@@ -85,6 +85,7 @@ public class jjsController {
         return null;
     }
 
+
     @ResponseBody
     @RequestMapping("/musicLink/addMusicCollect")
     public Map<String, Object> addMusicCollect(Integer song_id, HttpSession session) {
@@ -145,6 +146,7 @@ public class jjsController {
             return map;
         }*/
 
+    //我喜欢的音乐
     @RequestMapping("/myMusic/getMyMusicList")
     public String getMyMusicList(Integer song_id, HttpSession
             session, Model model) {
